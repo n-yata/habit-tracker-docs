@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(*)",
+      "Skill(update-config)"
+    ],
+    "additionalDirectories": [
+      "../backend",
+      "../frontend"
+    ]
+  }
+}
