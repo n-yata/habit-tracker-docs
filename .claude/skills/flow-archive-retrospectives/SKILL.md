@@ -34,15 +34,15 @@ flow-steering スキル(モード3)で作成された振り返りは、その作
 
 振り返りの記述を、内容に応じて以下の永続ドキュメントへ振り分ける。
 
-| 振り返りの内容 | 反映先 |
-| --- | --- |
-| プロダクトの要求・スコープの変化、新たに確定した要件 | `docs/1_requirements/product-requirements.md` |
-| 機能仕様の確定・変更(挙動、パラメータ、UI仕様など) | `docs/2_basic-design/functional-design.md` |
-| 技術的な設計判断、アーキテクチャ上の知見、非自明な構造の理由 | `docs/2_basic-design/architecture.md` |
-| ディレクトリ構成・ファイル配置の規約変更 | `docs/3_detail-design/repository-structure.md` |
-| 開発プロセス・コーディング規約・再発防止につながる標準化 | `docs/_shared/development-guidelines.md` |
-| 新しいドメイン用語・既存用語の定義変更 | `docs/_shared/glossary.md` |
-| 世界観・キャラクター・物語設定に関わる確定事項 | `docs/story.md` |
+| 振り返りの内容                                               | 反映先                                         |
+| ------------------------------------------------------------ | ---------------------------------------------- |
+| プロダクトの要求・スコープの変化、新たに確定した要件         | `docs/1_requirements/product-requirements.md`  |
+| 機能仕様の確定・変更(挙動、パラメータ、UI仕様など)           | `docs/2_basic-design/functional-design.md`     |
+| 技術的な設計判断、アーキテクチャ上の知見、非自明な構造の理由 | `docs/2_basic-design/architecture.md`          |
+| ディレクトリ構成・ファイル配置の規約変更                     | `docs/3_detail-design/repository-structure.md` |
+| 開発プロセス・コーディング規約・再発防止につながる標準化     | `docs/_shared/development-guidelines.md`       |
+| 新しいドメイン用語・既存用語の定義変更                       | `docs/_shared/glossary.md`                     |
+| 世界観・キャラクター・物語設定に関わる確定事項               | `docs/story.md`                                |
 
 ### `docs/` に反映すべき内容（昇格させる）
 
@@ -67,9 +67,11 @@ flow-steering スキル(モード3)で作成された振り返りは、その作
 ### ステップ1: 走査して対象を洗い出す
 
 1. `.steering/` 直下のディレクトリ一覧を取得する(`archives/` は**除外**)。
+
    ```
    Glob('.steering/*/retrospective.md')
    ```
+
    ※ `archives/` 配下を誤って拾わないよう、結果から `.steering/archives/` 以下のパスを除く。
    ※ 走査は `*`(1階層)で行い `**` は使わない。`*` なら `.steering/archives/<dir>/retrospective.md` を構造上拾わないため、`archives/` 除外と冪等性の前提が崩れない。
 
@@ -127,7 +129,7 @@ docs への反映(または「反映不要」の確定)が済んだディレク�
 
 ## 注意事項
 
-- **Git運用ルール**: 本スキルの変更(docs 更新・ディレクトリ移動)もプロジェクトの Git ルールに従う。`master` 直コミットは禁止。コミットが必要な場合は feature ブランチ(worktree)で行い、コミット前にクルトワ(security-engineer)のセキュリティレビューを通す。
+- **Git運用ルール**: 本スキルの変更(docs 更新・ディレクトリ移動)もプロジェクトの Git ルールに従う。`main` への直接コミットは避け、今いるブランチで作業する。コミット前にクルトワ(security-engineer)のセキュリティレビューを通す。
 - **承認なき破壊的操作の禁止**: docs の書き換え・ディレクトリ移動は、シャビの承認を得てから実行する。
 - **冪等性**: 再実行しても安全なように、`archives/` は常に走査対象外とする。既に反映済みの内容は重複追記しない。
 - **対象外を巻き込まない**: `retrospective.md` を持たないディレクトリ、`archives/` 配下、自分の作業範囲外の未コミット変更には触れない。

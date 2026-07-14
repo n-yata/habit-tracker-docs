@@ -377,7 +377,7 @@ scripts/
 
 **docs/ ディレクトリ**:
 - `product-requirements.md`: PRD
-- `functional-design.md`: 機能設計書
+- `functional-design.md`: 機能設計書（索引。詳細は `functional-design/` に分割）
 - `architecture.md`: アーキテクチャ設計書
 - `repository-structure.md`: 本ドキュメント
 - `development-guidelines.md`: 開発ガイドライン

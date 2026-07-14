@@ -53,7 +53,7 @@ ls docs/0_ideas/
 
 1. **docs-functional-designスキル**をロード
 1. `docs/1_requirements/product-requirements.md`を読む
-3. スキルのテンプレートとガイドに従って`docs/2_basic-design/functional-design.md`を作成
+3. スキルのテンプレートとガイドに従って`docs/2_basic-design/functional-design.md`（索引）と分割した詳細群`docs/2_basic-design/functional-design/`を作成
 
 ### ステップ3: アーキテクチャ設計書の作成
 
@@ -89,7 +89,7 @@ ls docs/0_ideas/
 
 作成したドキュメント:
 ✅ docs/1_requirements/product-requirements.md
-✅ docs/2_basic-design/functional-design.md
+✅ docs/2_basic-design/functional-design.md（機能設計書の索引。詳細は functional-design/ に分割）
 ✅ docs/2_basic-design/architecture.md
 ✅ docs/3_detail-design/repository-structure.md
 ✅ docs/_shared/development-guidelines.md

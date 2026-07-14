@@ -102,7 +102,7 @@ tests/e2e/
 
 **配置ドキュメント**:
 - `product-requirements.md`: プロダクト要求定義書
-- `functional-design.md`: 機能設計書
+- `functional-design.md`: 機能設計書（索引。詳細は `functional-design/` に分割）
 - `architecture.md`: アーキテクチャ設計書
 - `repository-structure.md`: リポジトリ構造定義書(本ドキュメント)
 - `development-guidelines.md`: 開発ガイドライン

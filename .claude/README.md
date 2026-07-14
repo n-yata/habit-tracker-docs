@@ -33,7 +33,7 @@
 | skill | 概要 | 成果物 |
 |---|---|---|
 | **docs-prd** | プロダクト要求定義書(PRD)を作成・更新する。プロダクトビジョン・ペルソナ・KPI・機能/非機能要件を定義する。 | `docs/1_requirements/product-requirements.md` |
-| **docs-functional-design** | 機能設計書を作成・更新する。PRD の要件を技術的にどう実現するかを設計する。 | `docs/2_basic-design/functional-design.md` |
+| **docs-functional-design** | 機能設計書を作成・更新する。PRD の要件を技術的にどう実現するかを設計する。 | `docs/2_basic-design/functional-design.md`（索引。詳細は `functional-design/`） |
 | **docs-architecture-design** | アーキテクチャ設計書を作成・更新する。システム構造・技術選定（テクノロジースタック）を定義する。 | `docs/2_basic-design/architecture.md` |
 | **docs-repository-structure** | リポジトリ構造定義書を作成・更新する。技術スタックを反映した具体的なディレクトリ構造を定義する。 | `docs/3_detail-design/repository-structure.md` |
 | **docs-development-guidelines** | 開発ガイドラインを作成・更新する。コーディング規約・命名規則・Git運用・テスト戦略の参照元でもある。 | `docs/_shared/development-guidelines.md` |

@@ -30,18 +30,20 @@ allowed-tools: Read, Write
 ## モード1: ステアリングファイル作成
 
 ### 目的
+
 新しい機能や変更のためのステアリングファイルを作成します。
 
 ### 手順
 
 1. **ステアリングディレクトリの確認**
+
    ```
    現在の日付を取得し、`.steering/[YYYYMMDD]-[機能名]/` の形式でディレクトリを作成
    ```
 
 2. **永続ドキュメントの確認**
    - `docs/1_requirements/product-requirements.md`
-   - `docs/2_basic-design/functional-design.md`
+   - `docs/2_basic-design/functional-design.md`（索引。詳細は `functional-design/`）
    - `docs/2_basic-design/architecture.md`
    - `docs/3_detail-design/repository-structure.md`
    - `docs/_shared/development-guidelines.md`
@@ -51,7 +53,6 @@ allowed-tools: Read, Write
 3. **テンプレートからファイル作成**
 
    以下のテンプレートを読み込み、プレースホルダーを具体的な内容に置き換えてファイルを作成:
-
    - `.claude/skills/flow-steering/templates/requirements.md` → `.steering/[日付]-[機能名]/requirements.md`
    - `.claude/skills/flow-steering/templates/design.md` → `.steering/[日付]-[機能名]/design.md`
    - `.claude/skills/flow-steering/templates/tasklist.md` → `.steering/[日付]-[機能名]/tasklist.md`
@@ -68,11 +69,13 @@ allowed-tools: Read, Write
 ## モード2: 実装（最重要）
 
 ### 目的
+
 tasklist.mdに従って実装を進め、**進捗を確実にドキュメントに記録**します。
 
 ### 🚨 重要な原則
 
 **MUST（必須）**:
+
 - tasklist.mdを常に開いた状態で実装
 - タスク開始時に必ずEditツールで`[ ]`→`[x]`に更新
 - タスク完了時に必ずEditツールで完了を記録
@@ -80,6 +83,7 @@ tasklist.mdに従って実装を進め、**進捗を確実にドキュメント�
 - NEVER: tasklist.mdを更新せずに次のタスクに進まない
 
 **NEVER（禁止）**:
+
 - tasklist.mdを見ずに実装を進める
 - TodoWriteツールだけで進捗管理する（TodoWriteは補助、tasklist.mdが正式）
 - 複数タスクをまとめて更新する（リアルタイムに更新する）
@@ -120,9 +124,12 @@ tasklist.mdに従って実装を進め、**進捗を確実にドキュメント�
    - 振り返りセクションに変更理由を詳細に記録
 
 5. **未完了タスクが残っている場合のNG例**
+
    ```markdown
    # retrospective.md（実装後の振り返り）
+
    **実装しなかったタスク**:
+
    - テストの実装（時間の都合により別タスクとして実施予定） ❌ 絶対にダメ
    ```
 
@@ -144,17 +151,20 @@ Read('.steering/[日付]-[機能名]/tasklist.md')
 #### ステップ2: TodoWriteでタスク管理開始
 
 tasklist.mdの内容に基づいてTodoWriteツールでタスクリストを作成:
+
 - これはClaude Code内部の補助的なメモ
 - **tasklist.mdこそが正式なドキュメント**
 
 #### ステップ3: タスクループ（各タスクで繰り返す）
 
 **3-1. 次のタスクを確認**
+
 ```
 tasklist.mdを読み、次の未完了タスク（`[ ]`）を特定
 ```
 
 **3-2. タスク開始をtasklist.mdに記録（必須）**
+
 ```
 Editツールを使って、tasklist.mdの該当行を`[ ]`→`[x]`に更新
 
@@ -166,16 +176,19 @@ new_string: "- [x] StorageServiceを実装"
 **重要**: Editツールを実行した直後に、更新が成功したことを確認する。
 
 **3-3. TodoWriteでもステータス更新**
+
 ```
 TodoWriteツールで該当タスクを"in_progress"に変更
 ```
 
 **3-4. 実装を実行**
+
 ```
 開発ガイドライン（docs/_shared/development-guidelines.md）に従って実装
 ```
 
 **3-5. タスク完了をtasklist.mdに記録（必須）**
+
 ```
 実装完了後、必ずEditツールでtasklist.mdを更新して完了を記録
 
@@ -183,11 +196,13 @@ TodoWriteツールで該当タスクを"in_progress"に変更
 ```
 
 **3-6. TodoWriteでもステータス更新**
+
 ```
 TodoWriteツールで該当タスクを"completed"に変更
 ```
 
 **3-7. 次のタスクへ**
+
 ```
 ステップ3-1に戻る
 ```
@@ -197,6 +212,7 @@ TodoWriteツールで該当タスクを"completed"に変更
 各フェーズ（例: フェーズ1、フェーズ2）が完了したら:
 
 1. **tasklist.mdを読み込んで進捗確認**
+
    ```
    Read('.steering/[日付]-[機能名]/tasklist.md')
    ```
@@ -215,6 +231,7 @@ TodoWriteツールで該当タスクを"completed"に変更
 **全フェーズの実装完了後、振り返りを書く前に必ず実行**:
 
 1. **tasklist.mdを読み込む**
+
    ```
    Read('.steering/[日付]-[機能名]/tasklist.md')
    ```
@@ -232,11 +249,13 @@ TodoWriteツールで該当タスクを"completed"に変更
    **✅ 正しい対処法**:
 
    **パターンA: タスクを実装する**
+
    ```
    ステップ3（タスクループ）に戻り、未完了タスクを実装する
    ```
 
    **パターンB: タスクが大きすぎる場合**
+
    ```
    1. タスクを小さなサブタスクに分割
    2. tasklist.mdに分割したサブタスクを追加
@@ -251,6 +270,7 @@ TodoWriteツールで該当タスクを"completed"に変更
    - 依存関係の変更により、タスクが実行不可能になった
 
    スキップ手順:
+
    ```
    1. tasklist.mdに技術的な理由を明記:
       「- [x] ~~タスク名~~（実装方針変更により不要: 具体的な技術的理由を詳細に記述）」
@@ -266,6 +286,7 @@ TodoWriteツールで該当タスクを"completed"に変更
 #### ステップ5: 全タスク完了後
 
 1. **最終確認**
+
    ```
    Read('.steering/[日付]-[機能名]/tasklist.md')
    ```
@@ -294,13 +315,13 @@ TodoWriteツールで該当タスクを"completed"に変更
 ## モード3: 振り返り
 
 ### 目的
+
 実装完了後、振り返りを **retrospective.md（tasklist.md とは別ファイル）** に記録します。
 ステアリングを切った作業（ケースA）でも、切らなかった軽微な作業（ケースB）でも、
 **残すべき振り返り内容があれば retrospective.md を残す**のが原則です。
 
-> **振り返りは作業ブランチのコミット・PRに含める**（コミット前に作成し、実装の変更一式と同じ
-> `feature` ブランチへ含めること）。**マージ後に後追いで `master` 本体ツリーへ置かない** ——
-> worktree 片付け後の後追い作成は未追跡ファイルのコミット漏れを招くため。
+> **振り返りはコミット前に作成し、実装の変更一式と同じコミット・PRに含める**。
+> 後追いで別コミットに分けると、コミット漏れ（未追跡ファイルの残存）を招くため避ける。
 
 ### ケースの判定
 
@@ -318,17 +339,21 @@ TodoWriteツールで該当タスクを"completed"に変更
 ### ケースA: ステアリングを切った作業の振り返り
 
 #### 前提
+
 - tasklist.md の全タスクが `[x]` になっていること（未完了タスクが残った状態で振り返りを書かない）
 
 #### 手順
 
 1. **tasklist.mdを読み込み、全タスク完了を確認**
+
    ```
    Read('.steering/[日付]-[機能名]/tasklist.md')
    ```
+
    未完了タスク（`[ ]`）が残っていればモード2に戻って完了させる。
 
 2. **振り返りテンプレートを読み込む**
+
    ```
    Read('.claude/skills/flow-steering/templates/retrospective.md')
    ```
@@ -341,6 +366,7 @@ TodoWriteツールで該当タスクを"completed"に変更
    - 次回への改善提案
 
 4. **Writeツールで retrospective.md を作成**
+
    ```
    Write('.steering/[日付]-[機能名]/retrospective.md')
    テンプレートのプレースホルダーを具体的な内容へ置き換えて書き込む
@@ -368,14 +394,17 @@ TodoWriteツールで該当タスクを"completed"に変更
    - 既存のステアリング3点ファイルは作らない。`retrospective.md` のみを置く。
 
 3. **振り返りテンプレートを読み込む**
+
    ```
    Read('.claude/skills/flow-steering/templates/retrospective.md')
    ```
 
 4. **Writeツールで retrospective.md を作成**
+
    ```
    Write('.steering/[YYYYMMDD]-[作業名]/retrospective.md')
    ```
+
    - **作業概要は必ず埋める**（requirements.md が無いため、後から何の作業か分かるように）。
    - tasklist が無いので「計画と実績の差分」は省略可。実際に残したい
      「学んだこと」「次回への改善提案」を中心に、該当する項目だけ埋める。
@@ -392,12 +421,14 @@ TodoWriteツールで該当タスクを"completed"に変更
 もし実装中にtasklist.mdの更新を忘れていることに気づいたら:
 
 1. **即座に更新を実行**
+
    ```
    Read('.steering/[日付]-[機能名]/tasklist.md')
    完了したタスクを特定し、すべてEditツールで`[x]`に更新
    ```
 
 2. **ユーザーに報告**
+
    ```
    「tasklist.mdの更新が遅れていたため、現在の進捗を反映しました。」
    ```
@@ -411,12 +442,14 @@ TodoWriteツールで該当タスクを"completed"に変更
 計画と実装が大きく異なる場合:
 
 1. **tasklist.mdに注釈を追加**
+
    ```
    Editツールで該当タスクに注釈を追加:
    「- [x] タスク名（実装方法を変更: 理由）」
    ```
 
 2. **必要に応じて新しいタスクを追加**
+
    ```
    Editツールで新しいタスクを追加
    ```

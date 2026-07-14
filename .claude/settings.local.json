@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(*)",
-      "Skill(update-config)"
+      "Skill(update-config)",
+      "Skill(docs-prd)",
+      "Skill(docs-functional-design)",
+      "Skill(docs-architecture-design)",
+      "Skill(docs-repository-structure)",
+      "Skill(docs-development-guidelines)",
+      "Skill(docs-glossary)"
     ],
     "additionalDirectories": [
       "../backend",

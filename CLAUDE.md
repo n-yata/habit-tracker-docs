@@ -73,7 +73,8 @@ docs/
   1_requirements/             ← 要件定義
     product-requirements.md
   2_basic-design/             ← 基本設計
-    functional-design.md
+    functional-design.md        ← 機能設計書の索引（システム構成図・技術スタック）
+    functional-design/          ← 機能設計書（関心事ごとに分割した詳細）
     architecture.md
   3_detail-design/            ← 詳細設計（永続分）
     repository-structure.md
@@ -91,7 +92,7 @@ docs/
 |---|---|---|
 | `0_ideas/` | 前段（アイデア） | 壁打ち下書き・技術調査メモ（自由形式）。`/setup-project` 実行時に自動読込 |
 | `1_requirements/` | 要件定義 | **product-requirements.md**（PRD）— 何を/なぜ作るか |
-| `2_basic-design/` | 基本設計 | **functional-design.md**（機能をどう実現するか）／**architecture.md**（システム構造・技術選定） |
+| `2_basic-design/` | 基本設計 | **functional-design.md**（機能をどう実現するか。索引。詳細は同名ディレクトリ `functional-design/` に分割）／**architecture.md**（システム構造・技術選定） |
 | `3_detail-design/` | 詳細設計（永続分） | **repository-structure.md**（技術スタックを反映した具体的なディレクトリ構造） |
 | `_shared/` | 横断（工程非依存） | **development-guidelines.md**（開発全体の規約）／**glossary.md**（ユビキタス言語） |
 
@@ -148,39 +149,23 @@ docs/
 
 **ポイント**: スペック駆動開発の詳細を意識する必要はありません。Claude Codeが適切なスキルを判断してロードします。
 
-## Git運用ルール(ブランチ戦略)
+## Git運用ルール
 
-**実装・修正作業は必ず `feature` ブランチで行う。`main` への直接コミットは禁止。**
-複数セッションが並行で動くため、作業をブランチ単位で隔離して混在を防ぐ。
+**実装・修正作業は、今いるブランチでそのまま行う。** 作業ごとに専用の作業ディレクトリや
+ブランチを新規に切る必要はない（このプロジェクトでは過剰なため）。ただし `main` への直接コミットは避ける。
 
 ### ワークフロー
 
-1. **作業開始時**: 先に `main` を `git pull` で最新化し、その最新の `main` から **`git worktree` で専用の作業ディレクトリを作成**してから作業を開始する。`main` 本体（メインの作業ツリー）で直接実装・修正を行うことは禁止。
-   - 命名規則: ブランチは `feature/<説明>` (例: `feature/stage3-cutscene`)
-   - 作成例: `git worktree add ../<プロジェクトディレクトリ>-<説明> -b feature/<説明> main`
-   - 必ず `main` を pull で最新化してから worktree を作成する(古い `main` から切ると後で不要なコンフリクトを生むため)
-   - worktree でディレクトリごと物理的に分離することで、複数セッションの並行作業によるチェックアウト競合・変更の混在を防ぐ
+1. **作業開始時**: 現在のブランチで作業を開始する（必要に応じて `git pull` で最新化する）。
 
 2. **作業完了時**: 以下の順で実施する
-   1. **コミット前に振り返り(`retrospective.md`)を作成する**。残すべき学び・申し送りがあれば `.steering/[YYYYMMDD]-[作業名]/retrospective.md` に書き、**実装の変更一式と同じ `feature` ブランチのコミット・PR に含める**。学びが何もない軽微作業(typo修正等)は作成不要。
-      - **マージ後に `main` 本体ツリーへ後追いで置かない**(別ブランチ・別タイミングでの後追い作成は、worktree 片付け後の未追跡漏れ＝コミット漏れの原因になる)。振り返りは必ず作業ブランチが生きているうちに、そのブランチのコミットへ含めること。
-   2. `main` を pull して最新化
-   3. `feature` ブランチに最新 `main` を取り込む(コンフリクトがあれば解消)
-   4. コミット前に**security-engineerのセキュリティレビュー**を実施(後述の既存ルール)
-   5. 変更一式(実装 + `retrospective.md`)をコミットする
-   6. `feature` ブランチを push
-   7. PR を作成する(`gh pr create`)
-   8. `main` へマージする。**マージ方式は Merge commit**
-
-3. **マージ完了後**: `feature` ブランチを削除する(ローカル・リモート両方)。**併せて作業に使った `git worktree` も必ず削除する**。
-   - 削除例: `git worktree remove ../<プロジェクトディレクトリ>-<説明>` (`main` へのマージ完了を確認してから実行する)
-   - worktree を消し忘れるとディスク・ブランチが散らかるため、マージ完了と worktree 削除はワンセットで必ず実施する
-   - `--force` は使わない。`git worktree remove` が拒否された場合は未コミット/未マージの変更が残っていないか確認する(安全側に倒す)
+   1. **コミット前に振り返り(`retrospective.md`)を作成する**。残すべき学び・申し送りがあれば `.steering/[YYYYMMDD]-[作業名]/retrospective.md` に書き、**実装の変更一式と同じコミット・PR に含める**。学びが何もない軽微作業(typo修正等)は作成不要。
+   2. コミット前に**security-engineerのセキュリティレビュー**を実施(後述の既存ルール)
+   3. 変更一式(実装 + `retrospective.md`)をコミットする
+   4. 必要に応じてブランチを push し、PR を作成する(`gh pr create`)。`main` へマージする場合は **Merge commit**
 
 ### 補足
 
-- 軽微な修正でも原則 `feature` ブランチを切る(`main` 直コミットは避ける)。
-- `git worktree` の利用は任意ではなく**必須**。作業開始時(手順1)に作成し、マージ完了後(手順3)に削除するまでをワンセットとする。
 - 自分の作業範囲外の未コミット変更を見つけたら、コミットに巻き込まず、ユーザーに確認すること。
 
 ## ドキュメント管理の原則
