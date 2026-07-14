@@ -128,6 +128,35 @@ func CalcStreak(h Habit, checkIns []CheckIn, today string) Streak { ... }
 - スペック: .steering/[YYYYMMDD]-[task]/
 ```
 
+## バージョン管理から除外するもの（.gitignore）
+
+各リポジトリでコミットしないファイルの主対象。生成物のうち**コミットするもの**（sqlc / oapi-codegen 生成コード等）は
+リポジトリ構造定義書（`docs/3_detail-design/repository-structure.md`）の「生成物の扱い」を参照。
+
+**backend**
+```
+/bin/
+*.exe
+.env
+coverage.out
+```
+
+**frontend**
+```
+node_modules/
+.next/
+dist/
+.env.local
+coverage/
+```
+
+**docs**
+```
+# .steering/ は履歴として保持する方針
+*.log
+.DS_Store
+```
+
 ## API契約の運用（リポジトリ横断）
 - 正本は `backend/api/openapi.yaml`。**契約変更は必ず openapi.yaml を先に更新**する。
 - 変更後は「backend の生成物（oapi-codegen / sqlc は SQL 起点）再生成 → frontend の TS 型再生成」を
@@ -162,6 +191,7 @@ func CalcStreak(h Habit, checkIns []CheckIn, today string) Streak { ... }
   過去日の遡り修正、リマインド超過ハイライト。
 
 ### テスト命名規則
+- ファイル名: Go は `*_test.go`（実装と同じパッケージに隣接配置）。TS は単体 `*.test.ts(x)` / E2E `*.spec.ts`。
 - Go: `Test<対象>_<条件>_<期待>`（日本語の説明的名も可）。
 - TS: `describe/it` で「対象 / 条件 / 期待結果」を明示。`it('test1')` のような無意味名は禁止。
 
