@@ -24,7 +24,7 @@ allowed-tools: Read, Write, Glob, Grep
 | `docs/0_ideas/initial-requirements.md` | プロダクト/機能の初期要求。`docs-prd` スキルがこのファイルを前提に PRD を生成する。**主たる成果物**。 |
 | `docs/0_ideas/<topic>.md` | 技術調査メモ、検討中の選択肢、アイデアの断片など。自由形式。 |
 
-`docs/0_ideas/` は `/setup-project` 実行時に自動的に読み込まれます。
+`docs/0_ideas/` は `/flow-setup-project` 実行時に自動的に読み込まれます。
 ここに書いた内容が、後続の永続ドキュメント作成の入力になります。
 
 ---
@@ -148,6 +148,6 @@ PRD 作成の前提となるため、以下の見出しを揃えておきます�
 壁打ちが一区切りしたら、次のいずれかをユーザーに案内します。
 
 * PRD を作るなら `docs-prd` スキル(`docs/0_ideas/initial-requirements.md` を入力にする)
-* 永続ドキュメント一式を作るなら `/setup-project`(`docs/0_ideas/` を読み込む)
+* 永続ドキュメント一式を作るなら `/flow-setup-project`(`docs/0_ideas/` を読み込む)
 
 未解決のまま残した論点があれば、`docs/0_ideas/` 内に明記してから終えてください。

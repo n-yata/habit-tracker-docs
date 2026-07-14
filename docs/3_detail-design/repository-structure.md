@@ -51,10 +51,9 @@ habit-tracker-docs/
 │       ├── tasklist.md
 │       └── retrospective.md
 └── .claude/                        # Claude Code 設定
-    ├── commands/
-    ├── skills/
+    ├── skills/                     # スキル（ワークフローの入口 flow-* も含む）
     ├── agents/
-    └── README.md                   # command/skill/agent の目次
+    └── README.md                   # skill/agent の目次
 ```
 
 **役割**: ドキュメント・スペック管理。実装コードは持たない。`docs/` 直下には実ファイルを置かず、
@@ -115,14 +114,18 @@ habit-tracker-backend/
 └── .env.example                    # DB接続情報のサンプル
 ```
 
-### レイヤーの役割・依存
+### レイヤーとディレクトリの対応
 
-| ディレクトリ | 役割 | 依存可能 | 依存禁止 |
-|---|---|---|---|
-| `internal/handler` | HTTP入出力・契約変換 | service, api（生成型） | repository, db |
-| `internal/service` | ユースケース組立・Tx境界 | domain, repository | handler |
-| `internal/domain` | 純粋ロジック（判定/集計） | Go標準ライブラリのみ | handler, service, repository, db |
-| `internal/repository` | 永続化 | db（sqlc生成）, domain（型） | handler, service |
+各ディレクトリがアーキテクチャのどのレイヤーを実装するかの対応。**責務・依存ルール（許可/禁止）の正本は
+[`architecture.md`](../2_basic-design/architecture.md) の「アーキテクチャパターン」**とし、本書は物理配置に徹する。
+
+| ディレクトリ | 対応レイヤー |
+|---|---|
+| `internal/handler` | Handler層（HTTP入出力・契約変換） |
+| `internal/service` | Service層（ユースケース組立・Tx境界） |
+| `internal/domain` | Domain層（純粋ロジック・外部依存なし） |
+| `internal/repository` | Repository層（永続化） |
+| `internal/db` / `internal/api` | 生成コード（sqlc / oapi-codegen） |
 
 **単体テスト（Go 慣習）**: 実装ファイルと同じパッケージに `*_test.go` を隣接配置する
 （例: `internal/domain/streak.go` ↔ `internal/domain/streak_test.go`）。Domain 層のテストを最重視。
@@ -131,14 +134,14 @@ habit-tracker-backend/
 `db/migrations` を適用して検証する。
 
 ### 命名規則（Go）
-- パッケージ名: 小文字・単数（`handler`, `service`, `domain`, `repository`）。
-- ファイル名: `snake_case.go`（例: `habit_service.go`）。
-- 型・エクスポート関数: PascalCase。非公開: camelCase。
-- テスト: `*_test.go`。
+識別子・ファイル名の命名規約は [`development-guidelines.md`](../_shared/development-guidelines.md) の
+「コーディング規約 › Go（backend）」を正本とする。構造面の補足のみ: 単体テストは実装と同じパッケージに
+`*_test.go` を隣接配置する（上の「レイヤーとディレクトリの対応」直下のテスト方針を参照）。
 
-### 生成物の扱い
-- sqlc 生成コード（`internal/db/sqlc`）・oapi-codegen 生成コード（`internal/api`）はコミットする
-  （生成コマンドは Makefile に定義。SQL/契約変更時に再生成）。
+### 生成物の扱い（コミット方針）
+- sqlc 生成コード（`internal/db/sqlc`）・oapi-codegen 生成コード（`internal/api`）は**リポジトリにコミットする**
+  （生成コマンドは Makefile に定義）。再生成のタイミング・手編集禁止の原則は
+  [`development-guidelines.md`](../_shared/development-guidelines.md) の「API契約の運用」を正本とする。
 
 ---
 
@@ -191,40 +194,42 @@ habit-tracker-frontend/
 └── .env.local.example              # API のベースURL 等
 ```
 
-### ディレクトリの役割・依存
+### レイヤーとディレクトリの対応
 
-| ディレクトリ | 役割 | 依存可能 | 依存禁止 |
-|---|---|---|---|
-| `app/` | ルーティング・ページ描画 | components, features | lib の直接 fetch（features 経由にする） |
-| `components/` | 表示専用UI | ui, generated（型） | features のロジック実体 |
-| `features/` | データ取得フック・機能ロジック | lib, generated | app への逆依存 |
-| `lib/` | 横断基盤（apiClient 等） | generated | features, app |
-| `generated/` | 契約由来の型（自動生成） | — | 手編集禁止 |
+**依存ルール（許可/禁止）の正本は [`architecture.md`](../2_basic-design/architecture.md) の
+「フロントエンド: 画面 + データフック分離」**とし、本書は物理配置に徹する。
+
+| ディレクトリ | 対応レイヤー / 役割 |
+|---|---|
+| `app/` | ページ（ルーティング・描画） |
+| `components/` | 表示専用UI（`ui/` は shadcn/ui 由来） |
+| `features/` | データ取得フック・機能ロジック |
+| `lib/` | 横断基盤（apiClient / queryClient） |
+| `generated/` | 契約由来の型（自動生成・手編集禁止） |
 
 ### 命名規則（TS/Next.js）
-- コンポーネントファイル: PascalCase（`HeatmapCalendar.tsx`）。
-- フック/関数ファイル: camelCase（`useHabits.ts`, `apiClient.ts`）。
-- ルーティングディレクトリ: kebab-case（`check-in/`）。App Router の規約ファイルは `page.tsx` 等。
-- テスト: `*.test.ts(x)`（単体） / `*.spec.ts`（E2E）。
+識別子・ファイル名の命名規約は [`development-guidelines.md`](../_shared/development-guidelines.md) の
+「コーディング規約 › TypeScript / Next.js（frontend）」を正本とする。構造に固有の点のみ補足する:
+- ルーティングディレクトリは kebab-case（`check-in/`）。App Router の規約ファイルは `page.tsx` / `layout.tsx` 等。
 
-### 生成物の扱い
-- `src/generated/api-types.ts` は `openapi.yaml` から生成。手編集禁止。契約更新時に再生成する。
+### 生成物の扱い（コミット方針）
+- `src/generated/api-types.ts`（`openapi.yaml` から生成）は**リポジトリにコミットする**。手編集禁止・
+  再生成のタイミングは [`development-guidelines.md`](../_shared/development-guidelines.md) の「API契約の運用」を正本とする。
 
 ---
 
 ## リポジトリ横断のルール
 
 ### API 契約の一元管理
-- 正本は `backend/api/openapi.yaml`。frontend はこれを取り込み（コピー/サブモジュール等、
-  開発ガイドラインで規定）、TS 型を生成する。
-- 契約変更は「`openapi.yaml` 更新 → backend 生成物再生成 → frontend 型再生成」をセットで行う。
+- 契約の正本ファイルは **`backend/api/openapi.yaml`**（配置＝本書の管轄）。frontend はこれを取り込んで TS 型を生成する。
+- 取り込み方法・再生成ワークフロー（`openapi.yaml` 更新 → backend/frontend 生成物の再生成をセットで行う）は
+  [`development-guidelines.md`](../_shared/development-guidelines.md) の「API契約の運用」を正本とする。
 
-### 依存方向（各リポジトリ共通の原則）
-- backend: Handler → Service → (Domain / Repository)。Domain は最下層で誰にも依存しない。
-- frontend: app → features → lib → generated。逆方向・循環依存を禁止。
-
-### ファイルサイズの目安
-- 1ファイルの肥大化を避ける（目安 300 行）。責務ごとに分割する。
+### 依存方向・ファイルサイズ
+- 依存方向（backend: Handler→Service→Domain/Repository、frontend: app→features→lib→generated）の正本は
+  [`architecture.md`](../2_basic-design/architecture.md) の「アーキテクチャパターン」。本書のディレクトリ対応表はその物理マッピング。
+- 1ファイルの肥大化を避ける目安（300 行）等のコーディング規約は
+  [`development-guidelines.md`](../_shared/development-guidelines.md) を参照。
 
 ---
 
@@ -235,38 +240,18 @@ habit-tracker-frontend/
 `tasklist.md` / `retrospective.md` を置く。命名例: `20260712-habit-tracker`。
 
 ### .claude/
-`commands/` `skills/` `agents/` と目次 `README.md`。command/skill/agent の追加・削除・リネーム時は
-`README.md` も同じ変更で更新する。
+`skills/` `agents/` と目次 `README.md`。ワークフローの入口（旧 `commands/`）も `skills/` の
+`flow-*` に統合済み。skill/agent の追加・削除・リネーム時は `README.md` も同じ変更で更新する。
 
 ---
 
-## 除外設定（.gitignore の主対象）
+## 除外設定（.gitignore）
 
-### backend
-```
-/bin/
-*.exe
-.env
-coverage.out
-```
-
-### frontend
-```
-node_modules/
-.next/
-dist/
-.env.local
-coverage/
-```
-
-### docs
-```
-# .steering/ は履歴として保持する方針（プロジェクト運用に従う）
-*.log
-.DS_Store
-```
+各リポジトリの `.gitignore` の主対象は [`development-guidelines.md`](../_shared/development-guidelines.md) の
+「バージョン管理から除外するもの（.gitignore）」を正本とする。生成物のうち**コミットするもの**は本書の
+各リポジトリ「生成物の扱い（コミット方針）」を参照。
 
 ## 参照ドキュメント
 - `docs/2_basic-design/architecture.md` - 技術スタック・レイヤー構成の正本
 - `docs/2_basic-design/functional-design/component-design.md` - コンポーネント設計
-- `docs/_shared/development-guidelines.md` - 契約取り込み・生成・Git運用の詳細
+- `docs/_shared/development-guidelines.md` - 命名規則・契約取り込み/再生成・Git運用・.gitignore の正本

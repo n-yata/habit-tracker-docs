@@ -1,25 +1,15 @@
 # .claude カタログ
 
-このディレクトリに置かれた **commands / skills / agents** の目次です。
+このディレクトリに置かれた **skills / agents** の目次です。
 「何があるか」を素早く見渡すための案内板であり、各項目の正本は
-それぞれの `SKILL.md` / command の frontmatter `description` です（カタログはそれを要約します）。
+それぞれの `SKILL.md` の frontmatter `description` です（カタログはそれを要約します）。
 
-> **メンテナンスのルール**: `.claude/` 配下に command / skill / agent を
+> **メンテナンスのルール**: `.claude/` 配下に skill / agent を
 > **追加・削除・リネームしたら、この README.md も必ず同じ変更で更新する**こと。
 > 詳細はプロジェクトの `CLAUDE.md`「.claude カタログの維持」を参照。
 
----
-
-## Commands（`/name` で明示的に起動するワークフロー）
-
-ユーザーが意図的に `/name` とタイプして始めるワークフローのエントリーポイント。
-
-| コマンド | 概要 | 起動 |
-|---|---|---|
-| **plan-feature** | 新機能の要求を planモードで対話的に練り、固まったら `.steering/[日付]-[タイトル]/requirements.md` を作成する。`/add-feature` の前段で、実装には進まず要求書の作成で停止する。 | `/plan-feature` |
-| **add-feature** | `requirements.md` を起点に、設計（design.md / tasklist.md 生成）→ 実装ループ → 実装検証（implementation-validator）→ テスト → 振り返りまでを無停止で自動実行する。 | `/add-feature [機能名]` |
-| **review-docs** | doc-reviewer サブエージェントを起動し、指定ドキュメントを完全性・明確性・一貫性・実装可能性・測定可能性の観点で詳細レビューする。 | `/review-docs [ドキュメントパス]` |
-| **setup-project** | 初回セットアップ。`docs/0_ideas/` を入力に、永続ドキュメント6種（PRD・機能設計・アーキテクチャ・リポジトリ構造・開発ガイドライン・用語集）を対話的に作成する。 | `/setup-project` |
+> **注**: 以前あった `commands/` は廃止し、ワークフローの入口もすべて `skills/` に統合済み。
+> ユーザーが `/name` とタイプして始めるワークフロー（旧コマンド）は `flow-*` スキルとして提供する。
 
 ---
 
@@ -41,22 +31,27 @@
 
 ### `flow-*`（ワークフロー系。開発の進め方＝アイデアを練る・作業を計画/実装/振り返る といったプロセスを支援する）
 
-| skill | 概要 |
-|---|---|
-| **flow-grill-with-docs** | 永続ドキュメント作成の前段として、アイデアをインタビュー形式の壁打ちで掘り下げ `docs/0_ideas/` に書き出す。固めた内容が PRD 等の入力になる。 |
-| **flow-steering** | 作業単位の計画・実装・振り返りを `.steering/` に記録する。モード1（ステアリングファイル作成）／モード2（実装と tasklist.md の進捗管理）／モード3（振り返り retrospective.md の作成）を持つ。 |
-| **flow-archive-retrospectives** | `.steering/` 配下の振り返り（retrospective.md）を棚卸しし、`docs/` へ昇格すべき学びを承認制で反映したうえで、処理済みディレクトリを `.steering/archives/` へアーカイブする。 |
+`/name` で明示起動するワークフローの入口（旧 `commands/`）も、この `flow-*` に含む。
+
+| skill | 概要 | 起動 |
+|---|---|---|
+| **flow-setup-project** | 初回セットアップ。`docs/0_ideas/` を入力に、永続ドキュメント6種（PRD・機能設計・アーキテクチャ・リポジトリ構造・開発ガイドライン・用語集）を対話的に作成する。 | `/flow-setup-project` |
+| **flow-add-feature** | 引数の有無で2モードに分岐する。**引数なし**は planモードで要求を対話的に練り `.steering/[日付]-[タイトル]/requirements.md` を作成して停止（実装には進まない）。**引数あり**は `requirements.md`（あれば尊重）を起点に、設計（design.md / tasklist.md 生成）→ 実装ループ → 実装検証（implementation-validator）→ テスト → 振り返りまでを無停止で自動実行する。 | `/flow-add-feature`（企画）／`/flow-add-feature [機能名]`（実装） |
+| **flow-review-docs** | doc-reviewer サブエージェントを起動し、指定ドキュメントを完全性・明確性・一貫性・実装可能性・測定可能性の観点で詳細レビューする。 | `/flow-review-docs [ドキュメントパス]` |
+| **flow-grill-with-docs** | 永続ドキュメント作成の前段として、アイデアをインタビュー形式の壁打ちで掘り下げ `docs/0_ideas/` に書き出す。固めた内容が PRD 等の入力になる。 | 会話で起動 |
+| **flow-steering** | 作業単位の計画・実装・振り返りを `.steering/` に記録する。モード1（ステアリングファイル作成）／モード2（実装と tasklist.md の進捗管理）／モード3（振り返り retrospective.md の作成）を持つ。 | 会話・他スキルから起動 |
+| **flow-archive-retrospectives** | `.steering/` 配下の振り返り（retrospective.md）を棚卸しし、`docs/` へ昇格すべき学びを承認制で反映したうえで、処理済みディレクトリを `.steering/archives/` へアーカイブする。 | 会話で起動 |
 
 ---
 
 ## Agents（サブエージェント）
 
-独立したコンテキストで動作する専門エージェント。主に command から起動される。
+独立したコンテキストで動作する専門エージェント。主にスキルから起動される。
 
 | agent | 概要 | 主な起動元 | model |
 |---|---|---|---|
-| **doc-reviewer** | ドキュメントの品質を完全性・明確性・一貫性・実装可能性・測定可能性の5観点で評価し、優先度別に改善提案を行う。 | `/review-docs` | sonnet |
-| **implementation-validator** | 実装コードをスペック準拠・コード品質・テストカバレッジ・セキュリティ・パフォーマンスの5観点で検証する。 | `/add-feature` | sonnet |
+| **doc-reviewer** | ドキュメントの品質を完全性・明確性・一貫性・実装可能性・測定可能性の5観点で評価し、優先度別に改善提案を行う。 | `/flow-review-docs` | sonnet |
+| **implementation-validator** | 実装コードをスペック準拠・コード品質・テストカバレッジ・セキュリティ・パフォーマンスの5観点で検証する。 | `/flow-add-feature` | sonnet |
 
 > ※ 設計・テスト・インフラ・セキュリティの専門チームメンバー
 > （architecture-designer / test-engineer / devops-engineer / security-engineer）は

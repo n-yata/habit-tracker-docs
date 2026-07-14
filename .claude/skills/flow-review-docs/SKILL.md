@@ -1,17 +1,12 @@
 ---
-description: ドキュメントの詳細レビューをサブエージェントで実行
+name: flow-review-docs
+description: 指定したドキュメントを doc-reviewer サブエージェントで詳細レビューするワークフロー。完全性・具体性・一貫性・測定可能性の観点で評価し、優先度付きの改善レポートを要約する。ドキュメントの詳細レビュー・品質チェックを依頼されたときに使用する。
+allowed-tools: Read, Glob, Task
 ---
 
 # ドキュメントレビュー
 
-引数: ドキュメントパス(例: `/review-docs docs/1_requirements/product-requirements.md`)
-
-## 実行方法
-
-```bash
-claude
-> /review-docs docs/1_requirements/product-requirements.md
-```
+引数: ドキュメントパス(例: `/flow-review-docs docs/1_requirements/product-requirements.md`)
 
 ## 手順
 

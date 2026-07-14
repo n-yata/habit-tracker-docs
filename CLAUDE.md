@@ -85,12 +85,12 @@ docs/
 
 #### 工程との対応（永続ドキュメントの分類）
 
-`/setup-project` で対話的に作成するテンプレート由来の6ドキュメントは、以下のように工程へ対応する。
+`/flow-setup-project` で対話的に作成するテンプレート由来の6ドキュメントは、以下のように工程へ対応する。
 **6つは工程と1対1ではなく、要件定義・基本設計・詳細設計・横断（工程非依存）に分かれる**。
 
 | ディレクトリ | 工程 | ドキュメント |
 |---|---|---|
-| `0_ideas/` | 前段（アイデア） | 壁打ち下書き・技術調査メモ（自由形式）。`/setup-project` 実行時に自動読込 |
+| `0_ideas/` | 前段（アイデア） | 壁打ち下書き・技術調査メモ（自由形式）。`/flow-setup-project` 実行時に自動読込 |
 | `1_requirements/` | 要件定義 | **product-requirements.md**（PRD）— 何を/なぜ作るか |
 | `2_basic-design/` | 基本設計 | **functional-design.md**（機能をどう実現するか。索引。詳細は同名ディレクトリ `functional-design/` に分割）／**architecture.md**（システム構造・技術選定） |
 | `3_detail-design/` | 詳細設計（永続分） | **repository-structure.md**（技術スタックを反映した具体的なディレクトリ構造） |
@@ -98,7 +98,22 @@ docs/
 
 > **重要**: 永続ドキュメントがカバーするのは主に **要件定義 ＋ 基本設計 ＋ 横断規約** まで。
 > **詳細設計の残り・テスト設計・実装・結合テスト**は永続ドキュメントではなく、作業単位の
-> `.steering/[日付]-[作業名]/`（`design.md` / `tasklist.md`、`/add-feature`）が工程ごとに担う。
+> `.steering/[日付]-[作業名]/`（`design.md` / `tasklist.md`、`/flow-add-feature`）が工程ごとに担う。
+
+#### ドキュメントの配置判断ルール（どのサブディレクトリに書くか）
+
+新しい永続ドキュメント（や既存への追記）をどこに置くか迷ったら、上の工程表に加えて次の順で判断する。
+
+1. **まず工程で分類する** — その内容は「何を/なぜ（要件定義）」「どう実現するか（設計）」「どこに何が居るか・具体（詳細設計）」「工程非依存の規約・用語（横断）」のどれか。
+2. **基本設計（`2_basic-design/`）と詳細設計（`3_detail-design/`）の境界** — **論理・外部から見た設計＝基本設計**（データモデルのER図、レイヤー責務、ユースケース、画面一覧、API カタログ、非機能方針）。**物理・具体＝詳細設計**（実ディレクトリ/ファイルツリー、技術スタックを反映した配置）。
+   - 例: `functional-design`（機能設計書＝基本設計の正本）は `2_basic-design/`。`repository-structure`（具体的なディレクトリ構造）は `3_detail-design/`。
+3. **`_shared/` に置く条件** — 特定工程の**成果物ではなく**、工程横断で参照される**規約・用語**であること（開発ガイドライン、用語集）。特定工程の設計物なら `_shared/` ではなくその工程へ。
+4. **設計高度を保つ（実装をドキュメントに書かない）** — 永続ドキュメントは設計まで。アルゴリズム設計（例: `functional-design/domain-logic.md`）は「考え方・仕様」の高度に留め、**具体的な関数分割・エッジケースの実装判断・実コードは `.steering/` と実装リポジトリ**へ委譲する。
+5. **正本は一箇所（重複させない）** — 同じ事実を複数ドキュメントに書かない。1つを正本にし、他方は参照リンクにする。判断に迷う「端」の内容は、上の工程分類で正本の置き場所を決める。
+   - 例: 命名規則・.gitignore・再生成ワークフロー＝`_shared/development-guidelines.md`、依存方向・レイヤー責務＝`2_basic-design/architecture.md`、物理配置＝`3_detail-design/repository-structure.md`。
+
+> **クイック判定**: 「実ファイル名・ツリーが出てくる」→詳細設計 / 「工程に依らない規約・用語」→`_shared` /
+> 「論理的な機能の実現方法」→基本設計 / 「何を・なぜ」→要件定義。
 
 本プロジェクト固有の追加ドキュメント:
 
@@ -115,20 +130,22 @@ docs/
 
 ### .claude カタログの維持
 
-`.claude/` 配下の command / skill / agent は `.claude/README.md` に目次化している。
-**command / skill / agent を追加・削除・リネームしたら、`.claude/README.md` も必ず同じ変更で更新する**こと（更新漏れでカタログが陳腐化するのを防ぐ）。
+`.claude/` 配下の skill / agent は `.claude/README.md` に目次化している。
+**skill / agent を追加・削除・リネームしたら、`.claude/README.md` も必ず同じ変更で更新する**こと（更新漏れでカタログが陳腐化するのを防ぐ）。
 
-- **追加時**: README.md の該当セクション（Commands / Skills / Agents）に「名前・概要・起動方法」を記載する。概要を省略せず、何をするものか1〜2文で必ず書く。
+- **追加時**: README.md の該当セクション（Skills / Agents）に「名前・概要・起動方法」を記載する。概要を省略せず、何をするものか1〜2文で必ず書く。
 - **削除・リネーム時**: README.md の該当エントリも追従し、旧名称の残骸を残さない。
-- 概要は各 `SKILL.md` / command の frontmatter `description` と整合させる（正本は frontmatter、README は案内板）。
+- 概要は各 `SKILL.md` の frontmatter `description` と整合させる（正本は frontmatter、README は案内板）。
+
+> **注**: ワークフローの入口（旧 `commands/`）も含め、すべて `skills/` に統合済み。`/name` はスキルとして起動する。
 
 ## 開発プロセス
 
 ### 初回セットアップ
 
 1. このテンプレートを使用
-2. `/setup-project` で永続的ドキュメント作成(対話的に6つ作成)
-3. `/add-feature [機能]` で機能実装
+2. `/flow-setup-project` で永続的ドキュメント作成(対話的に6つ作成)
+3. `/flow-add-feature [機能]` で機能実装
 
 ### 日常的な使い方
 
@@ -140,11 +157,11 @@ docs/
 > architecture.mdのパフォーマンス要件を見直して
 > glossary.mdに新しいドメイン用語を追加
 
-# 機能追加(定型フローはコマンド)
-> /add-feature ユーザープロフィール編集
+# 機能追加(定型フローはスキル)
+> /flow-add-feature ユーザープロフィール編集
 
 # 詳細レビュー(詳細なレポートが必要なとき)
-> /review-docs docs/1_requirements/product-requirements.md
+> /flow-review-docs docs/1_requirements/product-requirements.md
 ```
 
 **ポイント**: スペック駆動開発の詳細を意識する必要はありません。Claude Codeが適切なスキルを判断してロードします。

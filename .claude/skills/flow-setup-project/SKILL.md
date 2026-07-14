@@ -1,17 +1,12 @@
 ---
-description: 初回セットアップ: 6つの永続ドキュメントを対話的に作成する
+name: flow-setup-project
+description: 初回セットアップのワークフロー。docs/0_ideas/ を入力に、6つの永続ドキュメント(PRD・機能設計・アーキテクチャ・リポジトリ構造・開発ガイドライン・用語集)を docs-* スキルを順に使って対話的に作成する。プロジェクトの初期立ち上げ・永続ドキュメント一式の新規作成時に使用する。
+allowed-tools: Read, Write, Edit, Glob, Bash, Skill
 ---
 
 # 初回プロジェクトセットアップ
 
-このコマンドは、プロジェクトの6つの永続ドキュメントを対話的に作成します。
-
-## 実行方法
-
-```bash
-claude
-> /setup-project
-```
+このスキルは、プロジェクトの6つの永続ドキュメントを対話的に作成します。
 
 ## 実行前の確認
 
@@ -101,10 +96,10 @@ ls docs/0_ideas/
 - ドキュメントの編集: 普通に会話で依頼してください
   例: 「PRDに新機能を追加して」「architecture.mdを見直して」
 
-- 機能の追加: /add-feature [機能名] を実行してください
-  例: /add-feature ユーザー認証
+- 機能の追加: /flow-add-feature [機能名] を実行してください
+  例: /flow-add-feature ユーザー認証
 
-- ドキュメントレビュー: /review-docs [パス] を実行してください
-  例: /review-docs docs/1_requirements/product-requirements.md
+- ドキュメントレビュー: /flow-review-docs [パス] を実行してください
+  例: /flow-review-docs docs/1_requirements/product-requirements.md
 」
 ```
