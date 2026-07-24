@@ -1,7 +1,7 @@
 # プロダクト要求定義書 (Product Requirements Document)
 
 > 本ドキュメントは永続ドキュメント（`docs/`）の要件定義工程の正本。
-> 入力: `docs/0_ideas/initial-requirements.md`, `docs/0_ideas/tech-stack.md`,
+> 入力: `docs/baseline/ideas/initial-requirements.md`, `docs/baseline/ideas/tech-stack.md`,
 > `.steering/20260712-habit-tracker/requirements.md`。
 > スコープは第一マイルストーン（コア機能: 登録→チェックイン→可視化、単一ユーザー前提）。
 
@@ -193,14 +193,14 @@ Next.js による Web UI。ブラウザから Go API（REST）を直接呼び出
 
 ## 未決事項（詳細設計フェーズで確定）
 
-以下は要件レベルでは確定せず、詳細設計で判断する（`docs/0_ideas/tech-stack.md` にも記載）:
+以下は要件レベルでは確定せず、詳細設計で判断する（`docs/baseline/ideas/tech-stack.md` にも記載）:
 - タイムゾーン・日付境界の扱い（サーバー時刻基準か／ユーザーTZか）
 - 「特定曜日」ルールでのストリーク継続仕様の詳細（対象外の日をどう跨ぐか）
 - リマインド時刻超過ハイライトの判定基準（当日のみ／サーバー時刻基準）
 - 認証／通知実配信を後続マイルストーンで追加する際の区切り
 
 ## 参照ドキュメント
-- `docs/0_ideas/initial-requirements.md` - 初期要求（壁打ち成果）
-- `docs/0_ideas/tech-stack.md` - 技術スタック検討メモ
-- `docs/2_basic-design/functional-design.md` - 機能設計書（索引。詳細は `functional-design/` に分割）
-- `docs/2_basic-design/architecture.md` - アーキテクチャ設計書（本 PRD を受けて作成）
+- `docs/baseline/ideas/initial-requirements.md` - 初期要求（壁打ち成果）
+- `docs/baseline/ideas/tech-stack.md` - 技術スタック検討メモ
+- `docs/baseline/functional-design.md` - 機能設計書（索引。詳細は `functional-design/` に分割）
+- `docs/baseline/architecture.md` - アーキテクチャ設計書（本 PRD を受けて作成）

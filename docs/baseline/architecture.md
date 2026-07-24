@@ -1,8 +1,8 @@
 # 技術仕様書 (Architecture Design Document)
 
-> システム構造とテクノロジースタックの正本。PRD（`docs/1_requirements/product-requirements.md`）と
-> 機能設計書（`docs/2_basic-design/functional-design.md`。詳細は `functional-design/` に分割）を技術的に実現するための設計を定義する。
-> 技術スタックの検討経緯は `docs/0_ideas/tech-stack.md` を参照。第一マイルストーン（単一ユーザー）対象。
+> システム構造とテクノロジースタックの正本。PRD（`docs/baseline/product-requirements.md`）と
+> 機能設計書（`docs/baseline/functional-design.md`。詳細は `functional-design/` に分割）を技術的に実現するための設計を定義する。
+> 技術スタックの検討経緯は `docs/baseline/ideas/tech-stack.md` を参照。第一マイルストーン（単一ユーザー）対象。
 
 ## システム全体像
 
@@ -110,7 +110,7 @@ UI レンダリングに専念する。`backend` は PostgreSQL を単一のデ�
 - ページ/表示コンポーネントは描画に専念し、API 呼び出しは TanStack Query のカスタムフックに集約する。
 - API 型は OpenAPI 生成型を単一の情報源とする。
 - **依存方向は一方向**（逆依存・循環を禁止）。物理ディレクトリへの対応は
-  リポジトリ構造定義書（`docs/3_detail-design/repository-structure.md`）を参照。
+  リポジトリ構造定義書（`docs/baseline/repository-structure.md`）を参照。
 
 | レイヤー | 役割 | 依存可能 | 依存禁止 |
 |---|---|---|---|
@@ -212,7 +212,7 @@ UI レンダリングに専念する。`backend` は PostgreSQL を単一のデ�
 | コード生成物（sqlc / oapi-codegen / OpenAPI TS） | 生成コマンドを定義し、契約・SQL 変更時に再生成。生成物のコミット方針はリポジトリ構造定義書で規定 |
 
 ## 参照ドキュメント
-- `docs/1_requirements/product-requirements.md` - PRD
-- `docs/2_basic-design/functional-design.md` - 機能設計書（索引。詳細は `functional-design/` に分割）
-- `docs/3_detail-design/repository-structure.md` - リポジトリ構造定義書（本書のスタックを反映）
-- `docs/_shared/development-guidelines.md` - 開発ガイドライン
+- `docs/baseline/product-requirements.md` - PRD
+- `docs/baseline/functional-design.md` - 機能設計書（索引。詳細は `functional-design/` に分割）
+- `docs/baseline/repository-structure.md` - リポジトリ構造定義書（本書のスタックを反映）
+- `docs/baseline/development-guidelines.md` - 開発ガイドライン

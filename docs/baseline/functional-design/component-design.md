@@ -145,6 +145,6 @@ flowchart LR
 - 画面 → API: 各画面が呼ぶ API（詳細は [`screen-design.md`](./screen-design.md) の「主なAPI」列が正本）。
 - API 定義: メソッド・パス・入出力は [`api-design.md`](./api-design.md) の API一覧が正本（ノードは同じ ID）。
 - API → backend モジュール: `habit_*`＝習慣CRUD、`checkin_*`＝チェックイン、`dashboard_*`＝集計。
-  責務・依存は本ファイル上部の各層、物理配置は [リポジトリ構造定義書](../../3_detail-design/repository-structure.md)。
+  責務・依存は本ファイル上部の各層、物理配置は [リポジトリ構造定義書](../repository-structure.md)。
 
 > API を追加・変更したら [`api-design.md`](./api-design.md) の一覧を更新し、本図も追随させる。

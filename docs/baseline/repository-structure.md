@@ -1,6 +1,6 @@
 # リポジトリ構造定義書 (Repository Structure Document)
 
-> アーキテクチャ設計書（`docs/2_basic-design/architecture.md`）の技術スタック・レイヤー構成を反映した
+> アーキテクチャ設計書（`docs/baseline/architecture.md`）の技術スタック・レイヤー構成を反映した
 > 具体的なディレクトリ構造の正本。本プロジェクトは **3つの独立した Git リポジトリ** で構成する。
 > Go/Next.js の慣習に合わせ、テンプレート（単一リポ/TS前提）を各リポジトリへ適用する。
 
@@ -23,14 +23,13 @@ API 契約 `openapi.yaml` は正本を **backend リポジトリ**に置き、fr
 habit-tracker-docs/
 ├── CLAUDE.md                       # プロジェクトメモリ
 ├── docs/                           # 永続ドキュメント
-│   ├── 0_ideas/                    # 壁打ち下書き
-│   │   ├── initial-requirements.md
-│   │   └── tech-stack.md
-│   ├── 1_requirements/             # 要件定義
-│   │   └── product-requirements.md
-│   ├── 2_basic-design/             # 基本設計
-│   │   ├── functional-design.md     # 機能設計書の索引・システム構成図・技術スタック
-│   │   ├── functional-design/       # 機能設計書（関心事ごとに分割した詳細）
+│   ├── baseline/                   # 常に参照する指標（フラット、番号プレフィックスなし）
+│   │   ├── ideas/                    # 前段（壁打ち下書き・技術調査メモ）
+│   │   │   ├── initial-requirements.md
+│   │   │   └── tech-stack.md
+│   │   ├── product-requirements.md   # 要件定義（PRD）
+│   │   ├── functional-design.md      # 基本設計（機能設計書の索引・システム構成図・技術スタック）
+│   │   ├── functional-design/        # 基本設計（機能設計書。関心事ごとに分割した詳細）
 │   │   │   ├── data-model.md
 │   │   │   ├── component-design.md
 │   │   │   ├── usecase.md
@@ -38,12 +37,11 @@ habit-tracker-docs/
 │   │   │   ├── api-design.md
 │   │   │   ├── domain-logic.md
 │   │   │   └── cross-cutting.md
-│   │   └── architecture.md
-│   ├── 3_detail-design/            # 詳細設計（永続分）
-│   │   └── repository-structure.md # 本ドキュメント
-│   └── _shared/                    # 横断（工程非依存）
-│       ├── development-guidelines.md
-│       └── glossary.md
+│   │   ├── architecture.md           # 基本設計（システム構造・技術選定）
+│   │   ├── repository-structure.md   # 詳細設計（本ドキュメント）
+│   │   ├── development-guidelines.md # 横断（開発全体の規約）
+│   │   └── glossary.md               # 横断（ユビキタス言語）
+│   └── specs/                      # 各フェーズで参照・作成する成果物（現時点では未使用）
 ├── .steering/                      # 作業単位ドキュメント（履歴保持）
 │   └── [YYYYMMDD]-[task-name]/
 │       ├── requirements.md
@@ -56,8 +54,9 @@ habit-tracker-docs/
     └── README.md                   # skill/agent の目次
 ```
 
-**役割**: ドキュメント・スペック管理。実装コードは持たない。`docs/` 直下には実ファイルを置かず、
-工程別の番号付きディレクトリに格納する。
+**役割**: ドキュメント・スペック管理。実装コードは持たない。`docs/` 配下は `baseline/`（指標。
+フラット構成、`ideas/`・`functional-design/` のみサブディレクトリとして例外的に存在）と
+`specs/`（各フェーズの成果物）に分ける。`docs/` 直下には実ファイルを置かない。
 
 ---
 
@@ -117,7 +116,7 @@ habit-tracker-backend/
 ### レイヤーとディレクトリの対応
 
 各ディレクトリがアーキテクチャのどのレイヤーを実装するかの対応。**責務・依存ルール（許可/禁止）の正本は
-[`architecture.md`](../2_basic-design/architecture.md) の「アーキテクチャパターン」**とし、本書は物理配置に徹する。
+[`architecture.md`](architecture.md) の「アーキテクチャパターン」**とし、本書は物理配置に徹する。
 
 | ディレクトリ | 対応レイヤー |
 |---|---|
@@ -134,14 +133,14 @@ habit-tracker-backend/
 `db/migrations` を適用して検証する。
 
 ### 命名規則（Go）
-識別子・ファイル名の命名規約は [`development-guidelines.md`](../_shared/development-guidelines.md) の
+識別子・ファイル名の命名規約は [`development-guidelines.md`](development-guidelines.md) の
 「コーディング規約 › Go（backend）」を正本とする。構造面の補足のみ: 単体テストは実装と同じパッケージに
 `*_test.go` を隣接配置する（上の「レイヤーとディレクトリの対応」直下のテスト方針を参照）。
 
 ### 生成物の扱い（コミット方針）
 - sqlc 生成コード（`internal/db/sqlc`）・oapi-codegen 生成コード（`internal/api`）は**リポジトリにコミットする**
   （生成コマンドは Makefile に定義）。再生成のタイミング・手編集禁止の原則は
-  [`development-guidelines.md`](../_shared/development-guidelines.md) の「API契約の運用」を正本とする。
+  [`development-guidelines.md`](development-guidelines.md) の「API契約の運用」を正本とする。
 
 ---
 
@@ -196,7 +195,7 @@ habit-tracker-frontend/
 
 ### レイヤーとディレクトリの対応
 
-**依存ルール（許可/禁止）の正本は [`architecture.md`](../2_basic-design/architecture.md) の
+**依存ルール（許可/禁止）の正本は [`architecture.md`](architecture.md) の
 「フロントエンド: 画面 + データフック分離」**とし、本書は物理配置に徹する。
 
 | ディレクトリ | 対応レイヤー / 役割 |
@@ -208,13 +207,13 @@ habit-tracker-frontend/
 | `generated/` | 契約由来の型（自動生成・手編集禁止） |
 
 ### 命名規則（TS/Next.js）
-識別子・ファイル名の命名規約は [`development-guidelines.md`](../_shared/development-guidelines.md) の
+識別子・ファイル名の命名規約は [`development-guidelines.md`](development-guidelines.md) の
 「コーディング規約 › TypeScript / Next.js（frontend）」を正本とする。構造に固有の点のみ補足する:
 - ルーティングディレクトリは kebab-case（`check-in/`）。App Router の規約ファイルは `page.tsx` / `layout.tsx` 等。
 
 ### 生成物の扱い（コミット方針）
 - `src/generated/api-types.ts`（`openapi.yaml` から生成）は**リポジトリにコミットする**。手編集禁止・
-  再生成のタイミングは [`development-guidelines.md`](../_shared/development-guidelines.md) の「API契約の運用」を正本とする。
+  再生成のタイミングは [`development-guidelines.md`](development-guidelines.md) の「API契約の運用」を正本とする。
 
 ---
 
@@ -223,13 +222,13 @@ habit-tracker-frontend/
 ### API 契約の一元管理
 - 契約の正本ファイルは **`backend/api/openapi.yaml`**（配置＝本書の管轄）。frontend はこれを取り込んで TS 型を生成する。
 - 取り込み方法・再生成ワークフロー（`openapi.yaml` 更新 → backend/frontend 生成物の再生成をセットで行う）は
-  [`development-guidelines.md`](../_shared/development-guidelines.md) の「API契約の運用」を正本とする。
+  [`development-guidelines.md`](development-guidelines.md) の「API契約の運用」を正本とする。
 
 ### 依存方向・ファイルサイズ
 - 依存方向（backend: Handler→Service→Domain/Repository、frontend: app→features→lib→generated）の正本は
-  [`architecture.md`](../2_basic-design/architecture.md) の「アーキテクチャパターン」。本書のディレクトリ対応表はその物理マッピング。
+  [`architecture.md`](architecture.md) の「アーキテクチャパターン」。本書のディレクトリ対応表はその物理マッピング。
 - 1ファイルの肥大化を避ける目安（300 行）等のコーディング規約は
-  [`development-guidelines.md`](../_shared/development-guidelines.md) を参照。
+  [`development-guidelines.md`](development-guidelines.md) を参照。
 
 ---
 
@@ -247,11 +246,11 @@ habit-tracker-frontend/
 
 ## 除外設定（.gitignore）
 
-各リポジトリの `.gitignore` の主対象は [`development-guidelines.md`](../_shared/development-guidelines.md) の
+各リポジトリの `.gitignore` の主対象は [`development-guidelines.md`](development-guidelines.md) の
 「バージョン管理から除外するもの（.gitignore）」を正本とする。生成物のうち**コミットするもの**は本書の
 各リポジトリ「生成物の扱い（コミット方針）」を参照。
 
 ## 参照ドキュメント
-- `docs/2_basic-design/architecture.md` - 技術スタック・レイヤー構成の正本
-- `docs/2_basic-design/functional-design/component-design.md` - コンポーネント設計
-- `docs/_shared/development-guidelines.md` - 命名規則・契約取り込み/再生成・Git運用・.gitignore の正本
+- `docs/baseline/architecture.md` - 技術スタック・レイヤー構成の正本
+- `docs/baseline/functional-design/component-design.md` - コンポーネント設計
+- `docs/baseline/development-guidelines.md` - 命名規則・契約取り込み/再生成・Git運用・.gitignore の正本

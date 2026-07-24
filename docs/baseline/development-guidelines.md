@@ -1,8 +1,8 @@
 # 開発ガイドライン (Development Guidelines)
 
 > 本プロジェクト（HabitOS / 3リポジトリ: docs・backend(Go)・frontend(Next.js)）のコーディング規約と
-> 開発プロセスの正本。技術スタックは `docs/2_basic-design/architecture.md`、ディレクトリ構造は
-> `docs/3_detail-design/repository-structure.md` を前提とする。
+> 開発プロセスの正本。技術スタックは `docs/baseline/architecture.md`、ディレクトリ構造は
+> `docs/baseline/repository-structure.md` を前提とする。
 > Git 運用は本プロジェクト固有ルール（`CLAUDE.md`）に従う（一般的な Git Flow ではない点に注意）。
 
 ## コーディング規約
@@ -131,7 +131,7 @@ func CalcStreak(h Habit, checkIns []CheckIn, today string) Streak { ... }
 ## バージョン管理から除外するもの（.gitignore）
 
 各リポジトリでコミットしないファイルの主対象。生成物のうち**コミットするもの**（sqlc / oapi-codegen 生成コード等）は
-リポジトリ構造定義書（`docs/3_detail-design/repository-structure.md`）の「生成物の扱い」を参照。
+リポジトリ構造定義書（`docs/baseline/repository-structure.md`）の「生成物の扱い」を参照。
 
 **backend**
 ```
@@ -244,6 +244,6 @@ npm test                             # Vitest
 - frontend: ESLint / Prettier の IDE 連携。
 
 ## 参照ドキュメント
-- `docs/2_basic-design/architecture.md` - 技術スタック・レイヤー構成
-- `docs/3_detail-design/repository-structure.md` - ディレクトリ構造
+- `docs/baseline/architecture.md` - 技術スタック・レイヤー構成
+- `docs/baseline/repository-structure.md` - ディレクトリ構造
 - `CLAUDE.md` - Git 運用・スペック駆動開発の原則（正本）

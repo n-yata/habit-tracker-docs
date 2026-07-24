@@ -39,7 +39,7 @@ HabitOS プロジェクトで使用する用語（ユビキタス言語）の正
 
 | 略語 | 正式名称 | 意味 | 本プロジェクトでの使用 |
 |---|---|---|---|
-| PRD | Product Requirements Document | プロダクト要求定義書。 | `docs/1_requirements/product-requirements.md`。 |
+| PRD | Product Requirements Document | プロダクト要求定義書。 | `docs/baseline/product-requirements.md`。 |
 | MVP | Minimum Viable Product | 実用最小限のプロダクト。 | 第一マイルストーンのコア機能（登録→チェックイン→可視化）を指す。 |
 | CRUD | Create, Read, Update, Delete | データの生成・取得・更新・削除。 | 習慣の管理機能。 |
 | BFF | Backend For Frontend | フロントエンド専用の中間バックエンド層。 | **採用しない**方針の説明で使う（Next.js を BFF にせず Go API を直接叩く）。 |
@@ -125,8 +125,8 @@ Handler → Service → Domain / Repository → PostgreSQL
 | 達成率算出 (Calc Achievement Rate) | `達成率 = 期間内の対象日のうち done の数 / 期間内の対象日の総数`<br>例: 月水金習慣・期間内対象日 12 日・うち done 9 日 → 75% | `backend: internal/domain/achievement.go` |
 
 ## 参照ドキュメント
-- `docs/1_requirements/product-requirements.md`
-- `docs/2_basic-design/functional-design.md`（機能設計書の索引。詳細は `functional-design/` に分割）
-- `docs/2_basic-design/architecture.md`
-- `docs/3_detail-design/repository-structure.md`
-- `docs/_shared/development-guidelines.md`
+- `docs/baseline/product-requirements.md`
+- `docs/baseline/functional-design.md`（機能設計書の索引。詳細は `functional-design/` に分割）
+- `docs/baseline/architecture.md`
+- `docs/baseline/repository-structure.md`
+- `docs/baseline/development-guidelines.md`

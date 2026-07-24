@@ -39,8 +39,8 @@
 ## 制約・前提
 
 - **リポジトリ構成**: 3つの独立した Git リポジトリ（`docs/`＝ドキュメント＆Claude設定、
-  `backend/`＝API、`frontend/`＝UI）。正本は `docs/3_detail-design/repository-structure.md`。
-- **技術スタック**: 壁打ちで確定（詳細は `docs/0_ideas/tech-stack.md`）。要点:
+  `backend/`＝API、`frontend/`＝UI）。正本は `docs/baseline/repository-structure.md`。
+- **技術スタック**: 壁打ちで確定（詳細は `docs/baseline/ideas/tech-stack.md`）。要点:
   - backend: **Go**（chi + sqlc + pgx）／DB: **PostgreSQL**（golang-migrate）
   - frontend: **Next.js**（React + TS、UIレンダリング専念）+ TanStack Query + Tailwind + shadcn/ui
   - API: **REST + OpenAPI 契約駆動**（`openapi.yaml` から Go/TS の型を生成）。Next は BFF にせずクライアントから直接 Go API を叩く

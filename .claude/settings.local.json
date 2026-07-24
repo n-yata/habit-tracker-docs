@@ -8,7 +8,8 @@
       "Skill(docs-architecture-design)",
       "Skill(docs-repository-structure)",
       "Skill(docs-development-guidelines)",
-      "Skill(docs-glossary)"
+      "Skill(docs-glossary)",
+      "Skill(flow-steering)"
     ],
     "additionalDirectories": [
       "../backend",
