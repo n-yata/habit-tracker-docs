@@ -49,12 +49,15 @@ ls docs/baseline/ideas/
 1. **baseline-functional-designスキル**をロード
 2. `docs/baseline/product-requirements.md`を読む
 3. スキルのテンプレートとガイドに従って`docs/baseline/functional-design.md`
-   （データモデル・中核アルゴリズム・API/画面/ユースケースの一覧・モジュール構成図など、
-   プロジェクトの指標としてぶれてはいけない重要点の正本）を作成。UI表示仕様/エラーハンドリング/
-   テスト戦略などフェーズ横断の実装詳細は `docs/specs/_shared/` に分割する
-4. `docs/specs/2_basic-design/`（各画面/API/コンポーネントの実装詳細）はこの初回セットアップでは
-   作成しない。基本設計を実装レベルまで詳細化したくなったタイミングで、別途
-   **specs-basic-designスキル**（`/`で明示起動、または該当する会話で自動ロード）を使う
+   （データモデル〔概念モデル：エンティティ・区分値・ER図〕・中核アルゴリズム・API/画面/
+   ユースケースの一覧・モジュール構成図など、プロジェクトの指標としてぶれてはいけない重要点の
+   正本）を作成。UI表示仕様/エラーハンドリング/テスト戦略などフェーズ横断の実装詳細は
+   `docs/specs/_shared/` に分割する
+4. `docs/specs/2_basic-design/`（各画面/API/コンポーネントの実装詳細）と
+   `docs/specs/3_detail-design/`（データモデルの物理スキーマ＝テーブル定義書）は
+   この初回セットアップでは作成しない。実装レベルまで詳細化したくなったタイミングで、別途
+   **specs-basic-designスキル**／**specs-detail-designスキル**
+   （`/`で明示起動、または該当する会話で自動ロード）を使う
 
 ### ステップ3: アーキテクチャ設計書の作成
 
@@ -107,6 +110,9 @@ ls docs/baseline/ideas/
 
 - 基本設計の実装詳細（画面/API/コンポーネント）を詰めたい場合: specs-basic-design スキルを使って
   ください（`docs/specs/2_basic-design/` を作成）
+
+- データモデルの物理スキーマ（テーブル定義書）を詰めたい場合: specs-detail-design スキルを使って
+  ください（`docs/specs/3_detail-design/` を作成）
 
 - ドキュメントレビュー: /flow-review-docs [パス] を実行してください
   例: /flow-review-docs docs/baseline/product-requirements.md

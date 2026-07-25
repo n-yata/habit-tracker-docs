@@ -22,7 +22,7 @@
 | 本ガイドのステップ | 配置先 |
 |---|---|
 | ステップ2 システム構成図／技術スタック | `docs/baseline/functional-design.md` |
-| ステップ3 データモデル（ER図・物理スキーマ含む） | `docs/baseline/functional-design.md` |
+| ステップ3 データモデル（エンティティ・区分値・ER図の概念モデルまで） | `docs/baseline/functional-design.md`（物理スキーマは `specs-detail-design` スキルの範囲） |
 | ステップ4 アルゴリズム設計（中核ロジック） | `docs/baseline/functional-design.md` |
 | ステップ5 ユースケース一覧 | `docs/baseline/functional-design.md`（シーケンス図フルは `specs-basic-design` スキルの範囲） |
 | ステップ6 画面設計（画面一覧・遷移図） | `docs/baseline/functional-design.md`（各画面のレイアウト・項目定義・イベントは `specs-basic-design` スキルの範囲） |
@@ -152,6 +152,11 @@ erDiagram
         string title
     }
 ```
+
+> **配置先**: 本ステップで作るのは概念モデル（TypeScript型定義・ER図）まで。カラムの物理型・
+> NULL可否・デフォルト・物理制約名・索引名などの**物理スキーマ**は本ガイドの範囲外。baseline の
+> データモデルが確定したら、**`specs-detail-design` スキル**で
+> `docs/specs/3_detail-design/db/table-definition.md` に詳細化する。
 
 ### ステップ4: アルゴリズム設計（該当する場合）
 
