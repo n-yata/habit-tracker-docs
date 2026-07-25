@@ -42,11 +42,11 @@ allowed-tools: Read, Write
    ```
 
 2. **永続ドキュメントの確認**
-   - `docs/1_requirements/product-requirements.md`
-   - `docs/2_basic-design/functional-design.md`（索引。詳細は `functional-design/`）
-   - `docs/2_basic-design/architecture.md`
-   - `docs/3_detail-design/repository-structure.md`
-   - `docs/_shared/development-guidelines.md`
+   - `docs/baseline/product-requirements.md`
+   - `docs/baseline/functional-design.md`（重要点の正本。実装詳細は `docs/specs/2_basic-design/` と `docs/specs/_shared/`）
+   - `docs/baseline/architecture.md`
+   - `docs/baseline/repository-structure.md`
+   - `docs/baseline/development-guidelines.md`
 
    これらを読んで、プロジェクトの方針を理解する
 
@@ -184,7 +184,7 @@ TodoWriteツールで該当タスクを"in_progress"に変更
 **3-4. 実装を実行**
 
 ```
-開発ガイドライン（docs/_shared/development-guidelines.md）に従って実装
+開発ガイドライン（docs/baseline/development-guidelines.md）に従って実装
 ```
 
 **3-5. タスク完了をtasklist.mdに記録（必須）**

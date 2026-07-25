@@ -1,6 +1,6 @@
 ---
 name: flow-setup-project
-description: 初回セットアップのワークフロー。docs/0_ideas/ を入力に、6つの永続ドキュメント(PRD・機能設計・アーキテクチャ・リポジトリ構造・開発ガイドライン・用語集)を docs-* スキルを順に使って対話的に作成する。プロジェクトの初期立ち上げ・永続ドキュメント一式の新規作成時に使用する。
+description: 初回セットアップのワークフロー。docs/baseline/ideas/ を入力に、6つの永続ドキュメント(PRD・機能設計・アーキテクチャ・リポジトリ構造・開発ガイドライン・用語集)を docs-* スキルを順に使って対話的に作成する。プロジェクトの初期立ち上げ・永続ドキュメント一式の新規作成時に使用する。
 allowed-tools: Read, Write, Edit, Glob, Bash, Skill
 ---
 
@@ -10,17 +10,17 @@ allowed-tools: Read, Write, Edit, Glob, Bash, Skill
 
 ## 実行前の確認
 
-`docs/0_ideas/` ディレクトリ内のファイルを確認します。
+`docs/baseline/ideas/` ディレクトリ内のファイルを確認します。
 ```bash
 # 確認
-ls docs/0_ideas/
+ls docs/baseline/ideas/
 
 # ファイルが存在する場合
-✅ docs/0_ideas/initial-requirements.md が見つかりました
+✅ docs/baseline/ideas/initial-requirements.md が見つかりました
    この内容を元にPRDを作成します
 
 # ファイルが存在しない場合
-⚠️  docs/0_ideas/ にファイルがありません
+⚠️  docs/baseline/ideas/ にファイルがありません
    対話形式でPRDを作成します
 ```
 
@@ -28,13 +28,13 @@ ls docs/0_ideas/
 
 ### ステップ0: インプットの読み込み
 
-1. `docs/0_ideas/` 内のマークダウンファイルを全て読む
+1. `docs/baseline/ideas/` 内のマークダウンファイルを全て読む
 2. 内容を理解し、PRD作成の参考にする
 
 ### ステップ1: プロダクト要求定義書の作成
 
 1. **docs-prdスキル**をロード
-2. `docs/0_ideas/`の内容を元に`docs/1_requirements/product-requirements.md`を作成
+2. `docs/baseline/ideas/`の内容を元に`docs/baseline/product-requirements.md`を作成
 3. 壁打ちで出たアイデアを具体化：
    - 詳細なユーザーストーリー
    - 受け入れ条件
@@ -47,32 +47,36 @@ ls docs/0_ideas/
 ### ステップ2: 機能設計書の作成
 
 1. **docs-functional-designスキル**をロード
-1. `docs/1_requirements/product-requirements.md`を読む
-3. スキルのテンプレートとガイドに従って`docs/2_basic-design/functional-design.md`（索引）と分割した詳細群`docs/2_basic-design/functional-design/`を作成
+2. `docs/baseline/product-requirements.md`を読む
+3. スキルのテンプレートとガイドに従って`docs/baseline/functional-design.md`
+   （データモデル・中核アルゴリズム・API/画面/ユースケースの一覧・モジュール構成図など、
+   プロジェクトの指標としてぶれてはいけない重要点の正本）を作成。JSON入出力例・レイヤー別
+   インターフェース・シーケンス図フル・UI表示仕様/テスト戦略などの実装詳細は
+   `docs/specs/2_basic-design/` に分割する
 
 ### ステップ3: アーキテクチャ設計書の作成
 
 1. **docs-architecture-designスキル**をロード
 2. 既存のドキュメントを読む
-3. スキルのテンプレートとガイドに従って`docs/2_basic-design/architecture.md`を作成
+3. スキルのテンプレートとガイドに従って`docs/baseline/architecture.md`を作成
 
 ### ステップ4: リポジトリ構造定義書の作成
 
 1. **docs-repository-structureスキル**をロード
 2. 既存のドキュメントを読む
-3. スキルのテンプレートに従って`docs/3_detail-design/repository-structure.md`を作成
+3. スキルのテンプレートに従って`docs/baseline/repository-structure.md`を作成
 
 ### ステップ5: 開発ガイドラインの作成
 
 1. **docs-development-guidelinesスキル**をロード
 2. 既存のドキュメントを読む
-3. スキルのテンプレートに従って`docs/_shared/development-guidelines.md`を作成
+3. スキルのテンプレートに従って`docs/baseline/development-guidelines.md`を作成
 
 ### ステップ6: 用語集の作成
 
 1. **docs-glossaryスキル**をロード
 2. 既存のドキュメントを読む
-3. スキルのテンプレートに従って`docs/_shared/glossary.md`を作成
+3. スキルのテンプレートに従って`docs/baseline/glossary.md`を作成
 
 ## 完了条件
 
@@ -83,12 +87,12 @@ ls docs/0_ideas/
 「初回セットアップが完了しました!
 
 作成したドキュメント:
-✅ docs/1_requirements/product-requirements.md
-✅ docs/2_basic-design/functional-design.md（機能設計書の索引。詳細は functional-design/ に分割）
-✅ docs/2_basic-design/architecture.md
-✅ docs/3_detail-design/repository-structure.md
-✅ docs/_shared/development-guidelines.md
-✅ docs/_shared/glossary.md
+✅ docs/baseline/product-requirements.md
+✅ docs/baseline/functional-design.md（重要点の正本。実装詳細は docs/specs/2_basic-design/ に分割）
+✅ docs/baseline/architecture.md
+✅ docs/baseline/repository-structure.md
+✅ docs/baseline/development-guidelines.md
+✅ docs/baseline/glossary.md
 
 これで開発を開始する準備が整いました。
 
@@ -100,6 +104,6 @@ ls docs/0_ideas/
   例: /flow-add-feature ユーザー認証
 
 - ドキュメントレビュー: /flow-review-docs [パス] を実行してください
-  例: /flow-review-docs docs/1_requirements/product-requirements.md
+  例: /flow-review-docs docs/baseline/product-requirements.md
 」
 ```

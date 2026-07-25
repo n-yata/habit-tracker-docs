@@ -1,6 +1,6 @@
 ---
 name: flow-grill-with-docs
-description: 永続ドキュメント(docs/)を作成する前のアイデアを、インタビュー形式の壁打ちで掘り下げ docs/0_ideas/ に書き出すためのスキル。PRD やその他の正式ドキュメント作成の前段として使用。
+description: 永続ドキュメント(docs/)を作成する前のアイデアを、インタビュー形式の壁打ちで掘り下げ docs/baseline/ideas/ に書き出すためのスキル。PRD やその他の正式ドキュメント作成の前段として使用。
 allowed-tools: Read, Write, Glob, Grep
 ---
 
@@ -8,7 +8,7 @@ allowed-tools: Read, Write, Glob, Grep
 
 **説明**
 プロダクトや機能のアイデアを、インタビュー形式で徹底的に掘り下げる壁打ちセッションです。
-永続ドキュメント(`docs/`)を作成する**前段**として、固まった内容を `docs/0_ideas/` に成果物として書き出します。
+永続ドキュメント(`docs/`)を作成する**前段**として、固まった内容を `docs/baseline/ideas/` に成果物として書き出します。
 
 このスキルのゴールは「正式ドキュメントを書くこと」ではありません。
 正式ドキュメント(PRD・機能設計書など)を書き始められる状態まで、アイデアを言語化・構造化することがゴールです。
@@ -17,14 +17,14 @@ allowed-tools: Read, Write, Glob, Grep
 
 # 出力先
 
-壁打ちの成果は `docs/0_ideas/` 配下に書き出します。
+壁打ちの成果は `docs/baseline/ideas/` 配下に書き出します。
 
 | ファイル | 用途 |
 | --- | --- |
-| `docs/0_ideas/initial-requirements.md` | プロダクト/機能の初期要求。`docs-prd` スキルがこのファイルを前提に PRD を生成する。**主たる成果物**。 |
-| `docs/0_ideas/<topic>.md` | 技術調査メモ、検討中の選択肢、アイデアの断片など。自由形式。 |
+| `docs/baseline/ideas/initial-requirements.md` | プロダクト/機能の初期要求。`docs-prd` スキルがこのファイルを前提に PRD を生成する。**主たる成果物**。 |
+| `docs/baseline/ideas/<topic>.md` | 技術調査メモ、検討中の選択肢、アイデアの断片など。自由形式。 |
 
-`docs/0_ideas/` は `/flow-setup-project` 実行時に自動的に読み込まれます。
+`docs/baseline/ideas/` は `/flow-setup-project` 実行時に自動的に読み込まれます。
 ここに書いた内容が、後続の永続ドキュメント作成の入力になります。
 
 ---
@@ -63,7 +63,7 @@ allowed-tools: Read, Write, Glob, Grep
 質問内容がリポジトリの調査によって判断できる場合は、ユーザーへ質問する前にまず自分で確認します。
 
 * 既存の `docs/`(PRD・機能設計書など)
-* 既存の `docs/0_ideas/` の内容(壁打ちの続きの可能性がある)
+* 既存の `docs/baseline/ideas/` の内容(壁打ちの続きの可能性がある)
 * 関連する既存実装(`src/` 等)
 
 既に答えがある内容を質問してユーザーの時間を奪わないでください。
@@ -93,7 +93,7 @@ allowed-tools: Read, Write, Glob, Grep
 
 ## 既存ドキュメントとの矛盾を指摘する
 
-ユーザーの説明が、既存の `docs/` や `docs/0_ideas/` の記述と矛盾する場合は必ず指摘します。
+ユーザーの説明が、既存の `docs/` や `docs/baseline/ideas/` の記述と矛盾する場合は必ず指摘します。
 
 例：
 
@@ -107,11 +107,11 @@ allowed-tools: Read, Write, Glob, Grep
 
 ## 都度書き出す
 
-意思決定が固まるたびに、その場で `docs/0_ideas/` のファイルへ追記します。
+意思決定が固まるたびに、その場で `docs/baseline/ideas/` のファイルへ追記します。
 
 後でまとめて書こうとせず、確定した内容から都度記録してください。
 
-## docs/0_ideas/initial-requirements.md
+## docs/baseline/ideas/initial-requirements.md
 
 最初の要求(課題・ターゲット・主要機能のいずれか)が確定したタイミングで作成します。
 
@@ -131,14 +131,14 @@ PRD 作成の前提となるため、以下の見出しを揃えておきます�
 ## 制約・前提
 ```
 
-## docs/0_ideas/<topic>.md
+## docs/baseline/ideas/<topic>.md
 
 技術調査メモや検討中の選択肢など、要求とは別に残しておきたい内容は
 トピックごとの自由形式ファイルとして書き出します。
 
 ## 自由形式を尊重する
 
-`docs/0_ideas/` は下書きの場です。正式ドキュメントのような厳密な構造は求めません。
+`docs/baseline/ideas/` は下書きの場です。正式ドキュメントのような厳密な構造は求めません。
 過度な体裁は整えず、思考の過程・未確定の論点・却下した案も残して構いません。
 
 ---
@@ -147,7 +147,7 @@ PRD 作成の前提となるため、以下の見出しを揃えておきます�
 
 壁打ちが一区切りしたら、次のいずれかをユーザーに案内します。
 
-* PRD を作るなら `docs-prd` スキル(`docs/0_ideas/initial-requirements.md` を入力にする)
-* 永続ドキュメント一式を作るなら `/flow-setup-project`(`docs/0_ideas/` を読み込む)
+* PRD を作るなら `docs-prd` スキル(`docs/baseline/ideas/initial-requirements.md` を入力にする)
+* 永続ドキュメント一式を作るなら `/flow-setup-project`(`docs/baseline/ideas/` を読み込む)
 
-未解決のまま残した論点があれば、`docs/0_ideas/` 内に明記してから終えてください。
+未解決のまま残した論点があれば、`docs/baseline/ideas/` 内に明記してから終えてください。

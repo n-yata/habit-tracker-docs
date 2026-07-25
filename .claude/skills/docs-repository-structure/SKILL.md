@@ -1,6 +1,6 @@
 ---
 name: docs-repository-structure
-description: リポジトリ構造定義書(docs/3_detail-design/repository-structure.md)を作成・更新するための詳細ガイドとテンプレート。技術スタックを反映した具体的なディレクトリ構造を定義する。リポジトリ構造定義書の作成・改訂時にのみ使用。
+description: リポジトリ構造定義書(docs/baseline/repository-structure.md)を作成・更新するための詳細ガイドとテンプレート。技術スタックを反映した具体的なディレクトリ構造を定義する。リポジトリ構造定義書の作成・改訂時にのみ使用。
 allowed-tools: Read, Write
 ---
 
@@ -14,17 +14,18 @@ allowed-tools: Read, Write
 
 ### 必須ドキュメント
 
-1. `docs/1_requirements/product-requirements.md` (PRD)
-2. `docs/2_basic-design/functional-design.md` (機能設計書の索引。詳細は `functional-design/`)
-3. `docs/2_basic-design/architecture.md` (アーキテクチャ設計書)
+1. `docs/baseline/product-requirements.md` (PRD)
+2. `docs/baseline/functional-design.md` (機能設計書。データモデル・中核アルゴリズム・各種一覧の正本。
+   実装詳細は `docs/specs/2_basic-design/`)
+3. `docs/baseline/architecture.md` (アーキテクチャ設計書)
 
 リポジトリ構造は、アーキテクチャ設計で決定された技術スタックとシステム構成を反映した具体的なディレクトリ構造を定義します。
 
 ## 既存ドキュメントの優先順位
 
-**重要**: `docs/3_detail-design/repository-structure.md` に既存のリポジトリ構造定義書がある場合、以下の優先順位に従ってください:
+**重要**: `docs/baseline/repository-structure.md` に既存のリポジトリ構造定義書がある場合、以下の優先順位に従ってください:
 
-1. **既存のリポジトリ構造定義書 (`docs/3_detail-design/repository-structure.md`)** - 最優先
+1. **既存のリポジトリ構造定義書 (`docs/baseline/repository-structure.md`)** - 最優先
    - プロジェクト固有のディレクトリ構造が記載されている
    - このスキルのガイドより優先する
 
@@ -40,7 +41,7 @@ allowed-tools: Read, Write
 作成したリポジトリ構造定義書は以下に保存してください:
 
 ```
-docs/3_detail-design/repository-structure.md
+docs/baseline/repository-structure.md
 ```
 
 ## テンプレートの参照

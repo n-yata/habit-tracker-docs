@@ -28,20 +28,19 @@ habit-tracker-docs/
 │   │   │   ├── initial-requirements.md
 │   │   │   └── tech-stack.md
 │   │   ├── product-requirements.md   # 要件定義（PRD）
-│   │   ├── functional-design.md      # 基本設計（機能設計書の索引・システム構成図・技術スタック）
-│   │   ├── functional-design/        # 基本設計（機能設計書。関心事ごとに分割した詳細）
-│   │   │   ├── data-model.md
-│   │   │   ├── component-design.md
-│   │   │   ├── usecase.md
-│   │   │   ├── screen-design.md
-│   │   │   ├── api-design.md
-│   │   │   ├── domain-logic.md
-│   │   │   └── cross-cutting.md
+│   │   ├── functional-design.md      # 基本設計（機能設計書。重要点＝データモデル/中核アルゴリズム/各種一覧を集約する正本）
 │   │   ├── architecture.md           # 基本設計（システム構造・技術選定）
 │   │   ├── repository-structure.md   # 詳細設計（本ドキュメント）
 │   │   ├── development-guidelines.md # 横断（開発全体の規約）
 │   │   └── glossary.md               # 横断（ユビキタス言語）
-│   └── specs/                      # 各フェーズで参照・作成する成果物（現時点では未使用）
+│   └── specs/                      # 各フェーズで参照・作成する成果物
+│       ├── 2_basic-design/
+│       │   └── functional-design/    # 機能設計書の実装詳細（必要な時にだけ参照。一覧・中核仕様は baseline/functional-design.md が正本）
+│       │       ├── component-design.md   # レイヤー別インターフェース詳細
+│       │       ├── usecase.md            # ユースケースのシーケンス図フル
+│       │       └── api-design.md         # 各APIの入出力詳細・JSON例・エラーレスポンス
+│       └── _shared/                  # フェーズ横断で参照する実装詳細（特定フェーズに属さない）
+│           └── cross-cutting.md        # UI表示仕様・エラーハンドリング・非機能・テスト戦略の詳細
 ├── .steering/                      # 作業単位ドキュメント（履歴保持）
 │   └── [YYYYMMDD]-[task-name]/
 │       ├── requirements.md
@@ -55,8 +54,9 @@ habit-tracker-docs/
 ```
 
 **役割**: ドキュメント・スペック管理。実装コードは持たない。`docs/` 配下は `baseline/`（指標。
-フラット構成、`ideas/`・`functional-design/` のみサブディレクトリとして例外的に存在）と
-`specs/`（各フェーズの成果物）に分ける。`docs/` 直下には実ファイルを置かない。
+フラット構成、`ideas/` のみサブディレクトリとして例外的に存在）と
+`specs/`（各フェーズの成果物。機能設計書の分割詳細や、フェーズ横断の実装詳細（`_shared/`）もここに置く）
+に分ける。`docs/` 直下には実ファイルを置かない。
 
 ---
 
@@ -252,5 +252,5 @@ habit-tracker-frontend/
 
 ## 参照ドキュメント
 - `docs/baseline/architecture.md` - 技術スタック・レイヤー構成の正本
-- `docs/baseline/functional-design/component-design.md` - コンポーネント設計
+- `docs/baseline/functional-design.md` - コンポーネント設計・モジュール構成図
 - `docs/baseline/development-guidelines.md` - 命名規則・契約取り込み/再生成・Git運用・.gitignore の正本

@@ -1,6 +1,6 @@
 ---
 name: docs-glossary
-description: 用語集(docs/_shared/glossary.md)を作成・更新するための詳細ガイドとテンプレート。プロジェクト固有の用語・ユビキタス言語を体系的に定義する。用語集の作成・改訂・用語追加時にのみ使用。
+description: 用語集(docs/baseline/glossary.md)を作成・更新するための詳細ガイドとテンプレート。プロジェクト固有の用語・ユビキタス言語を体系的に定義する。用語集の作成・改訂・用語追加時にのみ使用。
 allowed-tools: Read, Write
 ---
 
@@ -14,21 +14,22 @@ allowed-tools: Read, Write
 
 ### 推奨ドキュメント
 
-1. **docs/1_requirements/product-requirements.md** (PRD)
-2. **docs/2_basic-design/functional-design.md** (機能設計書の索引。詳細は functional-design/)
-3. **docs/2_basic-design/architecture.md** (アーキテクチャ設計書)
-4. **docs/3_detail-design/repository-structure.md** (リポジトリ構造)
-5. **docs/_shared/development-guidelines.md** (開発ガイドライン)
+1. **docs/baseline/product-requirements.md** (PRD)
+2. **docs/baseline/functional-design.md** (機能設計書。データモデル・中核アルゴリズム・各種一覧の正本。
+   実装詳細は docs/specs/2_basic-design/)
+3. **docs/baseline/architecture.md** (アーキテクチャ設計書)
+4. **docs/baseline/repository-structure.md** (リポジトリ構造)
+5. **docs/baseline/development-guidelines.md** (開発ガイドライン)
 
 用語集は、全てのドキュメントで使用される用語を統一的に定義します。
 各ドキュメントから用語を抽出し、体系的に整理してください。
 
 ## 既存ドキュメントの優先順位
 
-**重要**: `docs/_shared/glossary.md` に既存の用語集がある場合、
+**重要**: `docs/baseline/glossary.md` に既存の用語集がある場合、
 以下の優先順位に従ってください:
 
-1. **既存の用語集 (`docs/_shared/glossary.md`)** - 最優先
+1. **既存の用語集 (`docs/baseline/glossary.md`)** - 最優先
    - プロジェクト固有の用語定義が記載されている
    - このスキルのガイドより優先する
 
@@ -44,7 +45,7 @@ allowed-tools: Read, Write
 作成した用語集は以下に保存してください:
 
 ```
-docs/_shared/glossary.md
+docs/baseline/glossary.md
 ```
 
 ## テンプレートの参照

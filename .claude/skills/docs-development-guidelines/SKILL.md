@@ -1,6 +1,6 @@
 ---
 name: docs-development-guidelines
-description: 開発ガイドライン(docs/_shared/development-guidelines.md)を作成・更新するための包括的なガイドとテンプレート、およびコーディング規約・命名規則・Git運用・テスト戦略の参照元。開発ガイドラインの作成・改訂時、またはコーディング規約・コミット規約を確認したいときに使用する。
+description: 開発ガイドライン(docs/baseline/development-guidelines.md)を作成・更新するための包括的なガイドとテンプレート、およびコーディング規約・命名規則・Git運用・テスト戦略の参照元。開発ガイドラインの作成・改訂時、またはコーディング規約・コミット規約を確認したいときに使用する。
 allowed-tools: Read, Write, Edit
 ---
 
@@ -16,18 +16,18 @@ allowed-tools: Read, Write, Edit
 
 ### 推奨ドキュメント
 
-1. `docs/2_basic-design/architecture.md` (アーキテクチャ設計書) - 技術スタックの確認
-2. `docs/3_detail-design/repository-structure.md` (リポジトリ構造) - ディレクトリ構造の確認
+1. `docs/baseline/architecture.md` (アーキテクチャ設計書) - 技術スタックの確認
+2. `docs/baseline/repository-structure.md` (リポジトリ構造) - ディレクトリ構造の確認
 
 開発ガイドラインは、プロジェクトの技術スタックとディレクトリ構造に
 基づいた具体的なコーディング規約と開発プロセスを定義します。
 
 ## 既存ドキュメントの優先順位
 
-**重要**: `docs/_shared/development-guidelines.md` に既存の開発ガイドラインがある場合、
+**重要**: `docs/baseline/development-guidelines.md` に既存の開発ガイドラインがある場合、
 以下の優先順位に従ってください:
 
-1. **既存の開発ガイドライン (`docs/_shared/development-guidelines.md`)** - 最優先
+1. **既存の開発ガイドライン (`docs/baseline/development-guidelines.md`)** - 最優先
    - プロジェクト固有の規約とプロセスが記載されている
    - このスキルのガイドより優先する
 
@@ -44,7 +44,7 @@ allowed-tools: Read, Write, Edit
 作成した開発ガイドラインは以下に保存してください:
 
 ```
-docs/_shared/development-guidelines.md
+docs/baseline/development-guidelines.md
 ```
 
 ## クイックリファレンス

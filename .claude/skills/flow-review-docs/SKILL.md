@@ -6,7 +6,7 @@ allowed-tools: Read, Glob, Task
 
 # ドキュメントレビュー
 
-引数: ドキュメントパス(例: `/flow-review-docs docs/1_requirements/product-requirements.md`)
+引数: ドキュメントパス(例: `/flow-review-docs docs/baseline/product-requirements.md`)
 
 ## 手順
 

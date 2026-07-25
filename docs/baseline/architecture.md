@@ -1,7 +1,7 @@
 # 技術仕様書 (Architecture Design Document)
 
 > システム構造とテクノロジースタックの正本。PRD（`docs/baseline/product-requirements.md`）と
-> 機能設計書（`docs/baseline/functional-design.md`。詳細は `functional-design/` に分割）を技術的に実現するための設計を定義する。
+> 機能設計書（`docs/baseline/functional-design.md`。実装詳細は `docs/specs/2_basic-design/` に退避）を技術的に実現するための設計を定義する。
 > 技術スタックの検討経緯は `docs/baseline/ideas/tech-stack.md` を参照。第一マイルストーン（単一ユーザー）対象。
 
 ## システム全体像
@@ -213,6 +213,6 @@ UI レンダリングに専念する。`backend` は PostgreSQL を単一のデ�
 
 ## 参照ドキュメント
 - `docs/baseline/product-requirements.md` - PRD
-- `docs/baseline/functional-design.md` - 機能設計書（索引。詳細は `functional-design/` に分割）
+- `docs/baseline/functional-design.md` - 機能設計書（データモデル・中核アルゴリズム・各種一覧の正本）
 - `docs/baseline/repository-structure.md` - リポジトリ構造定義書（本書のスタックを反映）
 - `docs/baseline/development-guidelines.md` - 開発ガイドライン

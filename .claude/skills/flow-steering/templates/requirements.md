@@ -43,6 +43,6 @@
 
 ## 参照ドキュメント
 
-- `docs/1_requirements/product-requirements.md` - プロダクト要求定義書
-- `docs/2_basic-design/functional-design.md` - 機能設計書（索引。詳細は `functional-design/`）
-- `docs/2_basic-design/architecture.md` - アーキテクチャ設計書
+- `docs/baseline/product-requirements.md` - プロダクト要求定義書
+- `docs/baseline/functional-design.md` - 機能設計書（重要点の正本。実装詳細は `docs/specs/2_basic-design/` と `docs/specs/_shared/`）
+- `docs/baseline/architecture.md` - アーキテクチャ設計書

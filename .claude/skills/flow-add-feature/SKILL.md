@@ -61,8 +61,8 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Task, Skill
 ### 1-C. テーマ確定後に調査する（初回レスポンス後）
 
 3. **プロジェクト方針の把握**（**1-A でテーマが固まってから**実施。初回レスポンス前には読み込まない）
-  - 必要に応じて `CLAUDE.md` および `docs/1_requirements/product-requirements.md` / `docs/2_basic-design/functional-design.md` /
-    `docs/2_basic-design/architecture.md` を読み、プロジェクトの北極星と整合する要求か確認する。
+  - 必要に応じて `CLAUDE.md` および `docs/baseline/product-requirements.md` / `docs/baseline/functional-design.md` /
+    `docs/baseline/architecture.md` を読み、プロジェクトの北極星と整合する要求か確認する。
   - **確定したテーマに関連する**既存実装のみ `Grep` / `Glob` で軽く調査し、実現可能性の感触を掴む。
     テーマ未確定のまま広く調査しない（的が絞れず無駄打ちになる）。
 

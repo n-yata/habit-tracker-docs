@@ -2,26 +2,29 @@
 
 このガイドは、プロダクト要求定義書(PRD)に基づいて機能設計書を作成するための実践的な指針を提供します。
 
-> **成果物の配置**: 機能設計書は単一ファイルではなく、**索引 `docs/2_basic-design/functional-design.md`
-> ＋ 関心事ごとに分割した詳細ファイル群（`functional-design/` 配下）**として出力する。
-> どのセクションをどのファイルに書くか、および各ファイルのスケルトンは `SKILL.md`「テンプレートの参照」
-> と `templates/` を参照。本ガイドの各セクションの解説（下記）は、その分割ファイルの中身を書くための手法。
+> **成果物の配置**: 機能設計書は **`docs/baseline/functional-design.md`（プロジェクトの指標として
+> ぶれてはいけない重要点の正本）＋ 実装詳細を分割した `docs/specs/2_basic-design/`**
+> の2箇所で構成する。どのセクションをどちらに書くか、および各ファイルのスケルトンは
+> `SKILL.md`「テンプレートの参照」と `templates/` を参照。本ガイドの各セクションの解説（下記）は、
+> その中身を書くための手法。
 
-### 本ガイドのステップと分割ファイルの対応
+### 本ガイドのステップと配置先の対応
 
-本ガイドの各ステップで作った内容は、以下の分割ファイルに配置する（正本の対応は `SKILL.md`「テンプレートの参照」）。
+本ガイドの各ステップで作った内容は、以下に配置する（正本の対応は `SKILL.md`「テンプレートの参照」）。
+**baseline は重要点（一覧・カタログ・正本表・中核ロジック）のみ。JSON例・擬似インターフェース・
+シーケンス図フル・詳細な表示/テスト仕様は specs へ。**
 
-| 本ガイドのステップ | 主な配置先（分割ファイル） |
+| 本ガイドのステップ | 配置先 |
 |---|---|
-| ステップ2 システム構成図／技術スタック | `functional-design.md`（索引） |
-| ステップ3 データモデル | `data-model.md` |
-| ステップ4 コンポーネント設計 | `component-design.md` |
-| ステップ5 アルゴリズム設計 | `domain-logic.md` |
-| ステップ6 ユースケース図 | `usecase.md` |
-| ステップ7 画面設計 | `screen-design.md` |
-| ステップ8 モジュール構成図 | `component-design.md`（末尾のセクション） |
-| ステップ9 UI設計／ステップ11 エラーハンドリング | `cross-cutting.md` |
-| ステップ10 ファイル構造 | 保存形式は `data-model.md`、物理配置は詳細設計の `repository-structure.md` |
+| ステップ2 システム構成図／技術スタック | `docs/baseline/functional-design.md` |
+| ステップ3 データモデル（ER図・物理スキーマ含む） | `docs/baseline/functional-design.md` |
+| ステップ4 コンポーネント設計（責務・インターフェース詳細） | `docs/specs/2_basic-design/component-design.md` |
+| ステップ5 アルゴリズム設計（中核ロジック） | `docs/baseline/functional-design.md` |
+| ステップ6 ユースケース図 | 一覧表は `docs/baseline/functional-design.md`、シーケンス図フルは `docs/specs/2_basic-design/usecase.md` |
+| ステップ7 画面設計（画面一覧・遷移図） | `docs/baseline/functional-design.md` |
+| ステップ8 モジュール構成図 | `docs/baseline/functional-design.md` |
+| ステップ9 UI設計／ステップ11 エラーハンドリング | `docs/specs/_shared/cross-cutting.md` |
+| ステップ10 ファイル構造 | 保存形式は `docs/baseline/functional-design.md`「データモデル」、物理配置は `docs/baseline/repository-structure.md` |
 
 ## 機能設計書の目的
 
@@ -392,13 +395,16 @@ sequenceDiagram
     CLI-->>User: "タスクを作成しました (ID: xxx)"
 ```
 
-> **配置先**: ユースケースのシーケンスは `usecase.md` に置く。冒頭に「ユースケース一覧」の表
-> （ID・ユースケース・アクター・目的・関連画面）を置き、各行から下のシーケンスへアンカーリンクする。
+> **配置先**: ユースケース一覧（ID・ユースケース・アクター・目的・関連画面の表）は
+> `docs/baseline/functional-design.md`「ユースケース一覧」に置く。各ユースケースのシーケンス図
+> フルは `docs/specs/2_basic-design/usecase.md` に置き、baseline の一覧の ID
+> （UC-01 等）と対応させる。
 
 ### ステップ7: 画面設計（GUIの場合）
 
-画面を持つアプリでは、**画面一覧**と**画面遷移図**を `screen-design.md` に定義する。
-本ファイルの画面一覧を画面命名の正本とし、各画面が呼ぶ API を「主なAPI」列で対応づける。
+画面を持つアプリでは、**画面一覧**と**画面遷移図**を `docs/baseline/functional-design.md`
+「画面設計」に定義する（一覧・遷移図はどちらも小さく、プロジェクトの指標として重要点にあたるため
+baseline に置く）。本節の画面一覧を画面命名の正本とし、各画面が呼ぶ API を「主なAPI」列で対応づける。
 
 **画面一覧（例）**:
 
@@ -415,14 +421,16 @@ stateDiagram-v2
 ```
 
 > ノード名は画面一覧の対応コンポーネント（`Dashboard`＝`DashboardPage` 等）に対応させる。
-> UI の表示仕様（色・状態表現など）は `cross-cutting.md`（後述のステップ9）に書く。
+> UI の表示仕様の詳細（色・状態表現など）は
+> `docs/specs/_shared/cross-cutting.md`（後述のステップ9）に書く。
 
 ### ステップ8: モジュール構成図（画面 × API × バックエンド）
 
-画面・API・バックエンドモジュールの対応関係を **API で紐づける俯瞰図**を、`component-design.md` の
-**末尾（モジュール構成図セクション）**に置く（コンポーネント構成の一部として同ファイルに集約する）。
-データの正本は各資料（画面＝`screen-design.md`、API＝`api-design.md`、責務＝`component-design.md` の各層）に
-置き、本図は対応の可視化に徹する（二重管理をしない）。
+画面・API・バックエンドモジュールの対応関係を **API で紐づける俯瞰図**を、
+`docs/baseline/functional-design.md`「モジュール構成図」に置く（プロジェクト全体の俯瞰図であり
+重要点にあたるため baseline に置く）。データの正本は各節（画面＝「画面設計」、API＝「API一覧」、
+責務＝`docs/specs/2_basic-design/component-design.md` の各層）に置き、本図は
+対応の可視化に徹する（二重管理をしない）。
 
 ```mermaid
 flowchart LR

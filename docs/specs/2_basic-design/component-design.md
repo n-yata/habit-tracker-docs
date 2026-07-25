@@ -1,9 +1,10 @@
-# コンポーネント設計
+# コンポーネント設計（レイヤー別インターフェース詳細）
 
-> 機能設計書の一部。親: [`functional-design.md`](../functional-design.md)。
-> レイヤー別（Handler / Service / Domain / Repository / Frontend）の責務・インターフェース・依存を定義し、
-> 末尾に**画面 × API × モジュールの構成図**を示す。
-> データモデルは [`data-model.md`](./data-model.md)、アルゴリズムは [`domain-logic.md`](./domain-logic.md) を参照。
+> 機能設計書の一部。親・モジュール構成図（画面×API×バックエンド）の正本は
+> [`functional-design.md`](../../../baseline/functional-design.md)。本ファイルはレイヤー別
+> （Handler / Service / Domain / Repository / Frontend）の責務・インターフェース（擬似コード）・
+> 依存関係の詳細のみを置く。
+> データモデルは baseline の「データモデル」、アルゴリズムは baseline の「アルゴリズム設計（ドメインロジック）」を参照。
 
 ## Domain層（backend / 外部依存なし・テストの主対象）
 
@@ -30,7 +31,7 @@ function calcStreak(habit: Habit, checkIns: CheckIn[], today: string): {
 function calcAchievementRate(habit: Habit, checkIns: CheckIn[], from: string, to: string): number;
 ```
 
-**依存関係**: なし（Go の標準ライブラリのみ）。ロジックの詳細は [`domain-logic.md`](./domain-logic.md)。
+**依存関係**: なし（Go の標準ライブラリのみ）。ロジックの詳細は baseline の「アルゴリズム設計（ドメインロジック）」。
 
 ## Repository層（backend）
 
@@ -93,58 +94,9 @@ OpenAPI から生成した TS クライアント型を用いる。
 
 **主なコンポーネント**:
 - ページコンポーネント（`DashboardPage` / `HabitsPage` / `CheckInPage` / `HabitDetailPage`）。
-  各ページの目的・ルート・扱うデータの一覧は [`screen-design.md`](./screen-design.md) の画面一覧を正本とする。
+  各ページの目的・ルート・扱うデータの一覧は baseline の「画面設計」の画面一覧を正本とする。
 - `HeatmapCalendar`・`StreakBadge`・`AchievementRing` などの表示コンポーネント。
 
-画面一覧・画面遷移は [`screen-design.md`](./screen-design.md)、ユースケースの流れは
-[`usecase.md`](./usecase.md)、UI 表示仕様は [`cross-cutting.md`](./cross-cutting.md) を参照。
-
-## モジュール構成図（画面 × API × バックエンド）
-
-フロントエンドの画面と backend のモジュールを API で紐づけた俯瞰図。対応データの正本は各資料に置く:
-画面一覧＝[`screen-design.md`](./screen-design.md)、API一覧＝[`api-design.md`](./api-design.md)、
-各モジュールの責務＝本ファイル上部の各層セクション。
-
-```mermaid
-flowchart LR
-    subgraph FE["フロントエンド（画面）"]
-      S_D["ダッシュボード<br/>DashboardPage"]
-      S_H["習慣管理<br/>HabitsPage"]
-      S_C["日付指定チェックイン<br/>CheckInPage"]
-      S_HD["習慣詳細<br/>HabitDetailPage"]
-    end
-
-    subgraph API["API（api-design.md）"]
-      A1["API-01 習慣一覧取得"]
-      A2["API-02 習慣登録"]
-      A3["API-03 習慣詳細取得"]
-      A4["API-04 習慣更新"]
-      A5["API-05 習慣アーカイブ"]
-      A6["API-06 チェックイン取得"]
-      A7["API-07 チェックイン記録"]
-      A8["API-08 ダッシュボード集計取得"]
-    end
-
-    subgraph BE["バックエンド（Handler → Service）"]
-      B_H["habit_handler<br/>→ habit_service"]
-      B_C["checkin_handler<br/>→ checkin_service"]
-      B_D["dashboard_handler<br/>→ dashboard_service"]
-    end
-
-    S_D --> A6 & A8
-    S_H --> A1 & A2 & A3 & A4 & A5
-    S_C --> A6 & A7
-    S_HD --> A3 & A8
-
-    A1 & A2 & A3 & A4 & A5 --> B_H
-    A6 & A7 --> B_C
-    A8 --> B_D
-```
-
-**読み方**:
-- 画面 → API: 各画面が呼ぶ API（詳細は [`screen-design.md`](./screen-design.md) の「主なAPI」列が正本）。
-- API 定義: メソッド・パス・入出力は [`api-design.md`](./api-design.md) の API一覧が正本（ノードは同じ ID）。
-- API → backend モジュール: `habit_*`＝習慣CRUD、`checkin_*`＝チェックイン、`dashboard_*`＝集計。
-  責務・依存は本ファイル上部の各層、物理配置は [リポジトリ構造定義書](../repository-structure.md)。
-
-> API を追加・変更したら [`api-design.md`](./api-design.md) の一覧を更新し、本図も追随させる。
+画面一覧・画面遷移は baseline の「画面設計」、ユースケースの流れは [`usecase.md`](./usecase.md)、
+UI 表示仕様は [`cross-cutting.md`](../../_shared/cross-cutting.md) を参照。モジュール構成図（画面×API×バックエンド）は
+[`functional-design.md`](../../../baseline/functional-design.md)「モジュール構成図」を参照。

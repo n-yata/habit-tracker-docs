@@ -92,10 +92,10 @@ model: sonnet
 ### ステップ1: スペックの理解
 
 関連するスペックドキュメントを読み込みます:
-- `docs/1_requirements/product-requirements.md`
-- `docs/2_basic-design/functional-design.md`（機能設計書の索引。詳細は `functional-design/`）
-- `docs/2_basic-design/architecture.md`
-- `docs/_shared/development-guidelines.md`
+- `docs/baseline/product-requirements.md`
+- `docs/baseline/functional-design.md`（重要点の正本。実装詳細は `docs/specs/2_basic-design/` と `docs/specs/_shared/`）
+- `docs/baseline/architecture.md`
+- `docs/baseline/development-guidelines.md`
 
 ### ステップ2: 実装コードの分析
 

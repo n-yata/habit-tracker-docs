@@ -1,20 +1,12 @@
-# API設計
+# API設計（入出力詳細）
 
-> 【分割テンプレート】このファイルは `docs/2_basic-design/functional-design/api-design.md` に配置する。
-> 機能設計書の一部。親: [`functional-design.md`](../functional-design.md)。
-> API契約の正本がある場合（例: `openapi.yaml`）はそれを正本とし、本ファイルは骨子を示す。
-> データ型は [`data-model.md`](./data-model.md) を参照。
+> 【分割テンプレート】このファイルは `docs/specs/2_basic-design/api-design.md` に配置する。
+> API名・ID・メソッド・パスの正本は `docs/baseline/functional-design.md`「API一覧」。本ファイルは
+> 各APIの入出力詳細・リクエスト/レスポンス例・エラーレスポンスなど、**必要な時にだけ参照すればよい
+> 実装レベルの記述**のみを置く。API契約の正本がある場合（例: `openapi.yaml`）はそちらを最優先とする。
+> データ型は baseline の「データモデル」を参照。
 
-## エンドポイント一覧
-
-| メソッド | パス | 概要 |
-|---|---|---|
-| GET | `/[resource]` | [説明] |
-| POST | `/[resource]` | [説明] |
-| PUT | `/[resource]/{id}` | [説明] |
-| DELETE | `/[resource]/{id}` | [説明] |
-
-## 例: [エンドポイント名]
+## 例: [エンドポイント名]（API-01）
 
 ```
 POST /[resource]
@@ -42,4 +34,6 @@ POST /[resource]
 - 409 Conflict: [条件]
 - 500 Internal Server Error: [条件]
 
-> エラー分類・表示メッセージは [`cross-cutting.md`](./cross-cutting.md) の「エラーハンドリング」と対応させる。
+> エラー分類・表示メッセージは `docs/specs/_shared/cross-cutting.md` の
+> 「エラーハンドリング」と対応させる。ステータスコードの選定（422 か 400 か等）はこの場で確定させ、
+> 「詳細設計で確定」のような曖昧な先送りを残さない。

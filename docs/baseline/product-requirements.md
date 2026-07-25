@@ -191,16 +191,15 @@ Next.js による Web UI。ブラウザから Go API（REST）を直接呼び出
 - 目標連携、AI による習慣提案
 - モバイルアプリ／オフライン対応
 
-## 未決事項（詳細設計フェーズで確定）
+## 未決事項
 
-以下は要件レベルでは確定せず、詳細設計で判断する（`docs/baseline/ideas/tech-stack.md` にも記載）:
-- タイムゾーン・日付境界の扱い（サーバー時刻基準か／ユーザーTZか）
-- 「特定曜日」ルールでのストリーク継続仕様の詳細（対象外の日をどう跨ぐか）
-- リマインド時刻超過ハイライトの判定基準（当日のみ／サーバー時刻基準）
-- 認証／通知実配信を後続マイルストーンで追加する際の区切り
+タイムゾーン・日付境界の扱い、特定曜日ルールのストリーク継続仕様、リマインド超過判定の基準は、
+基本設計（`docs/baseline/functional-design.md`）で確定済み。第一マイルストーン時点で残る未決事項は
+以下のみ:
+- 認証／通知実配信を後続マイルストーンで追加する際の区切り（Post-MVP のスコープ確定時に判断）
 
 ## 参照ドキュメント
 - `docs/baseline/ideas/initial-requirements.md` - 初期要求（壁打ち成果）
 - `docs/baseline/ideas/tech-stack.md` - 技術スタック検討メモ
-- `docs/baseline/functional-design.md` - 機能設計書（索引。詳細は `functional-design/` に分割）
+- `docs/baseline/functional-design.md` - 機能設計書（データモデル・中核アルゴリズム・各種一覧の正本）
 - `docs/baseline/architecture.md` - アーキテクチャ設計書（本 PRD を受けて作成）

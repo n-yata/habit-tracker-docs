@@ -1,6 +1,6 @@
 ---
 name: docs-architecture-design
-description: アーキテクチャ設計書(docs/2_basic-design/architecture.md)を作成・更新するための詳細ガイドとテンプレート。システム構造・技術選定(テクノロジースタック)を定義する。アーキテクチャ設計書の作成・改訂時にのみ使用(個別の設計相談・レビューは architecture-designer エージェントを使う)。
+description: アーキテクチャ設計書(docs/baseline/architecture.md)を作成・更新するための詳細ガイドとテンプレート。システム構造・技術選定(テクノロジースタック)を定義する。アーキテクチャ設計書の作成・改訂時にのみ使用(個別の設計相談・レビューは architecture-designer エージェントを使う)。
 allowed-tools: Read, Write
 ---
 
@@ -14,18 +14,19 @@ allowed-tools: Read, Write
 
 ### 必須ドキュメント
 
-1. `docs/1_requirements/product-requirements.md` (PRD)
-2. `docs/2_basic-design/functional-design.md` (機能設計書の索引。詳細は `functional-design/`)
+1. `docs/baseline/product-requirements.md` (PRD)
+2. `docs/baseline/functional-design.md` (機能設計書。データモデル・中核アルゴリズム・各種一覧の正本。
+   実装詳細は `docs/specs/2_basic-design/`)
 
 アーキテクチャ設計は、PRDの要件と機能設計を技術的に実現するための
 システム構造とテクノロジースタックを定義します。
 
 ## 既存ドキュメントの優先順位
 
-**重要**: `docs/2_basic-design/architecture.md` に既存のアーキテクチャ設計書がある場合、
+**重要**: `docs/baseline/architecture.md` に既存のアーキテクチャ設計書がある場合、
 以下の優先順位に従ってください:
 
-1. **既存のアーキテクチャ設計書 (`docs/2_basic-design/architecture.md`)** - 最優先
+1. **既存のアーキテクチャ設計書 (`docs/baseline/architecture.md`)** - 最優先
    - プロジェクト固有の技術選定と設計が記載されている
    - このスキルのガイドより優先する
 
@@ -41,7 +42,7 @@ allowed-tools: Read, Write
 作成したアーキテクチャ設計書は以下に保存してください:
 
 ```
-docs/2_basic-design/architecture.md
+docs/baseline/architecture.md
 ```
 
 ## テンプレートの参照

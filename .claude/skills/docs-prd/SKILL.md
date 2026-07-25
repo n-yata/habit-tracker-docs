@@ -1,6 +1,6 @@
 ---
 name: docs-prd
-description: プロダクト要求定義書(PRD / docs/1_requirements/product-requirements.md)を作成・更新するための詳細ガイドとテンプレート。プロダクトビジョン・ペルソナ・KPI・機能/非機能要件を定義する。PRD・プロダクト要求定義書の新規作成・改訂時にのみ使用。
+description: プロダクト要求定義書(PRD / docs/baseline/product-requirements.md)を作成・更新するための詳細ガイドとテンプレート。プロダクトビジョン・ペルソナ・KPI・機能/非機能要件を定義する。PRD・プロダクト要求定義書の新規作成・改訂時にのみ使用。
 allowed-tools: Read, Write
 ---
 
@@ -16,11 +16,11 @@ PRD作成を開始する前に、以下が完了している必要がありま�
 
 プロダクトのアイデアについて、ユーザー自身がClaude Codeとの対話を通じてブラッシュアップを完了している必要があります。
 
-### docs/0_ideas/initial-requirements.md が作成されている
+### docs/baseline/ideas/initial-requirements.md が作成されている
 
 **重要**: 壁打ちの内容は、ユーザーが以下のファイルに保存する必要があります:
 
-**ファイルパス**: `docs/0_ideas/initial-requirements.md`
+**ファイルパス**: `docs/baseline/ideas/initial-requirements.md`
 
 このファイルには以下の内容が含まれている必要があります:
 - プロダクトの基本的なアイデア
@@ -33,10 +33,10 @@ PRD作成時には、このファイルの内容を参照して詳細化を行�
 
 ## 既存ドキュメントの優先順位
 
-**重要**: `docs/1_requirements/product-requirements.md` に既存のPRDがある場合、
+**重要**: `docs/baseline/product-requirements.md` に既存のPRDがある場合、
 以下の優先順位に従ってください:
 
-1. **既存のPRD (`docs/1_requirements/product-requirements.md`)** - 最優先
+1. **既存のPRD (`docs/baseline/product-requirements.md`)** - 最優先
    - プロジェクト固有の要件が記載されている
    - このスキルのガイドより優先する
 
@@ -52,7 +52,7 @@ PRD作成時には、このファイルの内容を参照して詳細化を行�
 作成したPRDは以下に保存してください:
 
 ```
-docs/1_requirements/product-requirements.md
+docs/baseline/product-requirements.md
 ```
 
 ## テンプレートの参照
@@ -66,7 +66,7 @@ PRDを作成する際は、次のテンプレートを使用してください: 
 まず、ユーザーが作成した初期要求仕様を確認します:
 
 ```bash
-Read('docs/0_ideas/initial-requirements.md')
+Read('docs/baseline/ideas/initial-requirements.md')
 ```
 
 ### 2. PRDドラフトの生成

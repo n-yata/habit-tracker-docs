@@ -36,12 +36,12 @@ flow-steering スキル(モード3)で作成された振り返りは、その作
 
 | 振り返りの内容                                               | 反映先                                         |
 | ------------------------------------------------------------ | ---------------------------------------------- |
-| プロダクトの要求・スコープの変化、新たに確定した要件         | `docs/1_requirements/product-requirements.md`  |
-| 機能仕様の確定・変更(挙動、パラメータ、UI仕様など)           | `docs/2_basic-design/functional-design.md`     |
-| 技術的な設計判断、アーキテクチャ上の知見、非自明な構造の理由 | `docs/2_basic-design/architecture.md`          |
-| ディレクトリ構成・ファイル配置の規約変更                     | `docs/3_detail-design/repository-structure.md` |
-| 開発プロセス・コーディング規約・再発防止につながる標準化     | `docs/_shared/development-guidelines.md`       |
-| 新しいドメイン用語・既存用語の定義変更                       | `docs/_shared/glossary.md`                     |
+| プロダクトの要求・スコープの変化、新たに確定した要件         | `docs/baseline/product-requirements.md`        |
+| 機能仕様の確定・変更(挙動、パラメータ、UI仕様など)           | `docs/baseline/functional-design.md`           |
+| 技術的な設計判断、アーキテクチャ上の知見、非自明な構造の理由 | `docs/baseline/architecture.md`                |
+| ディレクトリ構成・ファイル配置の規約変更                     | `docs/baseline/repository-structure.md`        |
+| 開発プロセス・コーディング規約・再発防止につながる標準化     | `docs/baseline/development-guidelines.md`      |
+| 新しいドメイン用語・既存用語の定義変更                       | `docs/baseline/glossary.md`                    |
 | 世界観・キャラクター・物語設定に関わる確定事項               | `docs/story.md`                                |
 
 ### `docs/` に反映すべき内容（昇格させる）
@@ -57,7 +57,7 @@ flow-steering スキル(モード3)で作成された振り返りは、その作
 - すでに `docs/` に記載済みで、新規性のない内容
 
 > 判断に迷う「再発防止のハマりどころ」は、恒久ガイドラインに足るなら
-> `docs/_shared/development-guidelines.md` へ。プロジェクト全体の規約ではなく
+> `docs/baseline/development-guidelines.md` へ。プロジェクト全体の規約ではなく
 > 個別のTIPS止まりなら反映せず、振り返りの記録(アーカイブ)に残すだけで足りる。
 
 ---

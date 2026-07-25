@@ -22,12 +22,12 @@
 
 | skill | 概要 | 成果物 |
 |---|---|---|
-| **docs-prd** | プロダクト要求定義書(PRD)を作成・更新する。プロダクトビジョン・ペルソナ・KPI・機能/非機能要件を定義する。 | `docs/1_requirements/product-requirements.md` |
-| **docs-functional-design** | 機能設計書を作成・更新する。PRD の要件を技術的にどう実現するかを設計する。 | `docs/2_basic-design/functional-design.md`（索引。詳細は `functional-design/`） |
-| **docs-architecture-design** | アーキテクチャ設計書を作成・更新する。システム構造・技術選定（テクノロジースタック）を定義する。 | `docs/2_basic-design/architecture.md` |
-| **docs-repository-structure** | リポジトリ構造定義書を作成・更新する。技術スタックを反映した具体的なディレクトリ構造を定義する。 | `docs/3_detail-design/repository-structure.md` |
-| **docs-development-guidelines** | 開発ガイドラインを作成・更新する。コーディング規約・命名規則・Git運用・テスト戦略の参照元でもある。 | `docs/_shared/development-guidelines.md` |
-| **docs-glossary** | 用語集を作成・更新する。プロジェクト固有の用語・ユビキタス言語を体系的に定義する。 | `docs/_shared/glossary.md` |
+| **docs-prd** | プロダクト要求定義書(PRD)を作成・更新する。プロダクトビジョン・ペルソナ・KPI・機能/非機能要件を定義する。 | `docs/baseline/product-requirements.md` |
+| **docs-functional-design** | 機能設計書を作成・更新する。PRD の要件を技術的にどう実現するかを設計する。 | `docs/baseline/functional-design.md`（重要点の正本。実装詳細は `docs/specs/2_basic-design/` と `docs/specs/_shared/`） |
+| **docs-architecture-design** | アーキテクチャ設計書を作成・更新する。システム構造・技術選定（テクノロジースタック）を定義する。 | `docs/baseline/architecture.md` |
+| **docs-repository-structure** | リポジトリ構造定義書を作成・更新する。技術スタックを反映した具体的なディレクトリ構造を定義する。 | `docs/baseline/repository-structure.md` |
+| **docs-development-guidelines** | 開発ガイドラインを作成・更新する。コーディング規約・命名規則・Git運用・テスト戦略の参照元でもある。 | `docs/baseline/development-guidelines.md` |
+| **docs-glossary** | 用語集を作成・更新する。プロジェクト固有の用語・ユビキタス言語を体系的に定義する。 | `docs/baseline/glossary.md` |
 
 ### `flow-*`（ワークフロー系。開発の進め方＝アイデアを練る・作業を計画/実装/振り返る といったプロセスを支援する）
 
@@ -35,10 +35,10 @@
 
 | skill | 概要 | 起動 |
 |---|---|---|
-| **flow-setup-project** | 初回セットアップ。`docs/0_ideas/` を入力に、永続ドキュメント6種（PRD・機能設計・アーキテクチャ・リポジトリ構造・開発ガイドライン・用語集）を対話的に作成する。 | `/flow-setup-project` |
+| **flow-setup-project** | 初回セットアップ。`docs/baseline/ideas/` を入力に、永続ドキュメント6種（PRD・機能設計・アーキテクチャ・リポジトリ構造・開発ガイドライン・用語集）を対話的に作成する。 | `/flow-setup-project` |
 | **flow-add-feature** | 引数の有無で2モードに分岐する。**引数なし**は planモードで要求を対話的に練り `.steering/[日付]-[タイトル]/requirements.md` を作成して停止（実装には進まない）。**引数あり**は `requirements.md`（あれば尊重）を起点に、設計（design.md / tasklist.md 生成）→ 実装ループ → 実装検証（implementation-validator）→ テスト → 振り返りまでを無停止で自動実行する。 | `/flow-add-feature`（企画）／`/flow-add-feature [機能名]`（実装） |
 | **flow-review-docs** | doc-reviewer サブエージェントを起動し、指定ドキュメントを完全性・明確性・一貫性・実装可能性・測定可能性の観点で詳細レビューする。 | `/flow-review-docs [ドキュメントパス]` |
-| **flow-grill-with-docs** | 永続ドキュメント作成の前段として、アイデアをインタビュー形式の壁打ちで掘り下げ `docs/0_ideas/` に書き出す。固めた内容が PRD 等の入力になる。 | 会話で起動 |
+| **flow-grill-with-docs** | 永続ドキュメント作成の前段として、アイデアをインタビュー形式の壁打ちで掘り下げ `docs/baseline/ideas/` に書き出す。固めた内容が PRD 等の入力になる。 | 会話で起動 |
 | **flow-steering** | 作業単位の計画・実装・振り返りを `.steering/` に記録する。モード1（ステアリングファイル作成）／モード2（実装と tasklist.md の進捗管理）／モード3（振り返り retrospective.md の作成）を持つ。 | 会話・他スキルから起動 |
 | **flow-archive-retrospectives** | `.steering/` 配下の振り返り（retrospective.md）を棚卸しし、`docs/` へ昇格すべき学びを承認制で反映したうえで、処理済みディレクトリを `.steering/archives/` へアーカイブする。 | 会話で起動 |
 

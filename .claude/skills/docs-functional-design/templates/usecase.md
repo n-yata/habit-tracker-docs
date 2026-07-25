@@ -1,20 +1,14 @@
-# ユースケース図
+# ユースケース図（シーケンス詳細）
 
-> 【分割テンプレート】このファイルは `docs/2_basic-design/functional-design/usecase.md` に配置する。
-> 機能設計書の一部。親: [`functional-design.md`](../functional-design.md)。
-> 主要ユースケースを、レイヤー横断のシーケンス（システム挙動）として定義する。
-> 画面一覧・画面遷移は [`screen-design.md`](./screen-design.md)、各層の責務は
-> [`component-design.md`](./component-design.md)、集計/判定アルゴリズムは [`domain-logic.md`](./domain-logic.md) を参照。
+> 【分割テンプレート】このファイルは `docs/specs/2_basic-design/usecase.md` に配置する。
+> ユースケース一覧（ID・アクター・目的・関連画面）の正本は `docs/baseline/functional-design.md`
+> 「ユースケース一覧」。本ファイルは各ユースケースのレイヤー横断シーケンス（システム挙動）の
+> **詳細**（必要な時にだけ参照すればよい実装レベルの記述）のみを置く。
+> 画面一覧・画面遷移は baseline の「画面設計」、各層の責務は
+> `docs/specs/2_basic-design/component-design.md`、集計/判定アルゴリズムは
+> baseline の「アルゴリズム設計（ドメインロジック）」を参照。
 
-## ユースケース一覧
-
-> まず主要ユースケースを一覧化し、各ユースケースのシーケンス詳細（下の該当セクション）へアンカーリンクする。
-
-| ID | ユースケース | アクター | 目的 | 関連画面 |
-|---|---|---|---|---|
-| UC-01 | [[ユースケース名]](#ユースケース-ユースケース名) | [アクター] | [目的] | [関連画面] |
-
-## ユースケース: [ユースケース名]
+## ユースケース: [ユースケース名]（UC-01）
 
 ```mermaid
 sequenceDiagram
@@ -37,5 +31,5 @@ sequenceDiagram
 1. [ステップ1]
 2. [ステップ2]
 
-> 主要ユースケースごとに上記シーケンスを繰り返す。集計・判定ロジックの詳細は
-> [`domain-logic.md`](./domain-logic.md) へリンクする。
+> 主要ユースケースごとに、baseline の一覧の ID（UC-01, UC-02, …）に対応させて上記シーケンスを
+> 繰り返す。集計・判定ロジックの詳細は baseline の「アルゴリズム設計（ドメインロジック）」へリンクする。
