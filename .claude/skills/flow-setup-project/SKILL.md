@@ -50,9 +50,11 @@ ls docs/baseline/ideas/
 2. `docs/baseline/product-requirements.md`を読む
 3. スキルのテンプレートとガイドに従って`docs/baseline/functional-design.md`
    （データモデル・中核アルゴリズム・API/画面/ユースケースの一覧・モジュール構成図など、
-   プロジェクトの指標としてぶれてはいけない重要点の正本）を作成。JSON入出力例・レイヤー別
-   インターフェース・シーケンス図フル・UI表示仕様/テスト戦略などの実装詳細は
-   `docs/specs/2_basic-design/` に分割する
+   プロジェクトの指標としてぶれてはいけない重要点の正本）を作成。UI表示仕様/エラーハンドリング/
+   テスト戦略などフェーズ横断の実装詳細は `docs/specs/_shared/` に分割する
+4. `docs/specs/2_basic-design/`（各画面/API/コンポーネントの実装詳細）はこの初回セットアップでは
+   作成しない。基本設計を実装レベルまで詳細化したくなったタイミングで、別途
+   **specs-basic-designスキル**（`/`で明示起動、または該当する会話で自動ロード）を使う
 
 ### ステップ3: アーキテクチャ設計書の作成
 
@@ -88,7 +90,7 @@ ls docs/baseline/ideas/
 
 作成したドキュメント:
 ✅ docs/baseline/product-requirements.md
-✅ docs/baseline/functional-design.md（重要点の正本。実装詳細は docs/specs/2_basic-design/ に分割）
+✅ docs/baseline/functional-design.md（重要点の正本。フェーズ横断の実装詳細は docs/specs/_shared/ に分割）
 ✅ docs/baseline/architecture.md
 ✅ docs/baseline/repository-structure.md
 ✅ docs/baseline/development-guidelines.md
@@ -102,6 +104,9 @@ ls docs/baseline/ideas/
 
 - 機能の追加: /flow-add-feature [機能名] を実行してください
   例: /flow-add-feature ユーザー認証
+
+- 基本設計の実装詳細（画面/API/コンポーネント）を詰めたい場合: specs-basic-design スキルを使って
+  ください（`docs/specs/2_basic-design/` を作成）
 
 - ドキュメントレビュー: /flow-review-docs [パス] を実行してください
   例: /flow-review-docs docs/baseline/product-requirements.md

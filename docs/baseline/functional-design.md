@@ -286,9 +286,10 @@ API名・ID の採番は本一覧を正本とし、追加時は連番（API-09�
 
 ## 画面設計
 
-画面一覧と画面遷移を定義する。**本節の画面一覧を画面命名の正本**とする。UI コンポーネントの責務・
-インターフェースは `docs/specs/2_basic-design/component-design.md`、UI 表示仕様
-（色・状態表現など）は `docs/specs/_shared/cross-cutting.md` を参照。
+画面一覧と画面遷移を定義する。**本節の画面一覧を画面命名の正本**とする。各画面のレイアウト
+（ワイヤーフレーム）・画面項目定義・画面イベントは `docs/specs/2_basic-design/screen-design.md`、
+UI コンポーネントの責務・インターフェースは `docs/specs/2_basic-design/component-design.md`、
+UI 表示仕様（色・状態表現など）は `docs/specs/_shared/cross-cutting.md` を参照。
 
 ### 画面一覧
 
