@@ -21,7 +21,7 @@ allowed-tools: Read, Write, Glob, Grep
 
 | ファイル | 用途 |
 | --- | --- |
-| `docs/baseline/ideas/initial-requirements.md` | プロダクト/機能の初期要求。`docs-prd` スキルがこのファイルを前提に PRD を生成する。**主たる成果物**。 |
+| `docs/baseline/ideas/initial-requirements.md` | プロダクト/機能の初期要求。`baseline-prd` スキルがこのファイルを前提に PRD を生成する。**主たる成果物**。 |
 | `docs/baseline/ideas/<topic>.md` | 技術調査メモ、検討中の選択肢、アイデアの断片など。自由形式。 |
 
 `docs/baseline/ideas/` は `/flow-setup-project` 実行時に自動的に読み込まれます。
@@ -147,7 +147,7 @@ PRD 作成の前提となるため、以下の見出しを揃えておきます�
 
 壁打ちが一区切りしたら、次のいずれかをユーザーに案内します。
 
-* PRD を作るなら `docs-prd` スキル(`docs/baseline/ideas/initial-requirements.md` を入力にする)
+* PRD を作るなら `baseline-prd` スキル(`docs/baseline/ideas/initial-requirements.md` を入力にする)
 * 永続ドキュメント一式を作るなら `/flow-setup-project`(`docs/baseline/ideas/` を読み込む)
 
 未解決のまま残した論点があれば、`docs/baseline/ideas/` 内に明記してから終えてください。

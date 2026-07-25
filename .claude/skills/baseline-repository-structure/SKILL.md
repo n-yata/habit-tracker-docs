@@ -1,5 +1,5 @@
 ---
-name: docs-repository-structure
+name: baseline-repository-structure
 description: リポジトリ構造定義書(docs/baseline/repository-structure.md)を作成・更新するための詳細ガイドとテンプレート。技術スタックを反映した具体的なディレクトリ構造を定義する。リポジトリ構造定義書の作成・改訂時にのみ使用。
 allowed-tools: Read, Write
 ---

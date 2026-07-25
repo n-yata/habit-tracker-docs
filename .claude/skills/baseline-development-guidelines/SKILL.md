@@ -1,5 +1,5 @@
 ---
-name: docs-development-guidelines
+name: baseline-development-guidelines
 description: 開発ガイドライン(docs/baseline/development-guidelines.md)を作成・更新するための包括的なガイドとテンプレート、およびコーディング規約・命名規則・Git運用・テスト戦略の参照元。開発ガイドラインの作成・改訂時、またはコーディング規約・コミット規約を確認したいときに使用する。
 allowed-tools: Read, Write, Edit
 ---

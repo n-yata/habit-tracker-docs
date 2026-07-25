@@ -181,7 +181,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Task, Skill
   - `tasklist.md`の**先頭にある未完了タスク**を1つ特定する。
   - そのタスクを完了させるために必要な実装作業を実行する。
   - `Skill('flow-steering')`を**実装モード**で使用する。
-  - `Skill('docs-development-guidelines')`のコーディング規約を常に遵守する。
+  - `Skill('baseline-development-guidelines')`のコーディング規約を常に遵守する。
 
 4. タスクリストの更新:
   - 実行したタスクが完了したら、`Edit`ツールを使用して`tasklist.md`を更新し、該当タスクを `[ ]` から `[x]` に変更する。

@@ -3,12 +3,12 @@
     "allow": [
       "Bash(*)",
       "Skill(update-config)",
-      "Skill(docs-prd)",
-      "Skill(docs-functional-design)",
-      "Skill(docs-architecture-design)",
-      "Skill(docs-repository-structure)",
-      "Skill(docs-development-guidelines)",
-      "Skill(docs-glossary)",
+      "Skill(baseline-prd)",
+      "Skill(baseline-functional-design)",
+      "Skill(baseline-architecture-design)",
+      "Skill(baseline-repository-structure)",
+      "Skill(baseline-development-guidelines)",
+      "Skill(baseline-glossary)",
       "Skill(flow-steering)"
     ],
     "additionalDirectories": [

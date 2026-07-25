@@ -1,5 +1,5 @@
 ---
-name: docs-prd
+name: baseline-prd
 description: プロダクト要求定義書(PRD / docs/baseline/product-requirements.md)を作成・更新するための詳細ガイドとテンプレート。プロダクトビジョン・ペルソナ・KPI・機能/非機能要件を定義する。PRD・プロダクト要求定義書の新規作成・改訂時にのみ使用。
 allowed-tools: Read, Write
 ---
