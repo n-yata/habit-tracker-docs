@@ -21,11 +21,11 @@
 
 | No | シナリオ | 操作の流れ | 期待結果 | 完了 |
 |---|---|---|---|:--:|
-| 1 | チェックイン記録がダッシュボード集計に反映される | 月水金習慣を登録 → 数日分 `PUT` で記録 → `GET /dashboard?from=&to=` | 実DBから取得したチェックイン列を元に `currentStreak`/`longestStreak`/`achievementRate`/`heatmap` が正しく算出される（Domain層のアルゴリズムをユニットテストで検証済み。ここでは実データ経路での接続を確認） | [ ] |
-| 2 | 複数習慣を横断して習慣ごとに集計される | `daily`/`weekly_count`/`specific_days` の習慣を複数登録し、それぞれにチェックインを記録 → `GET /dashboard` | 習慣ごとに独立した集計結果が配列で返る（N+1回避自体はユニットテストで検証済み。ここでは実DBに対する `listByHabitInRange` の実クエリ結果が正しいことを確認） | [ ] |
-| 3 | リマインド超過ハイライトが当日チェックインリストに反映される | `reminderTime` を過去時刻に設定した未完了の対象習慣を登録 → `GET /check-ins?date=today` | `overdue=true` が返る（サーバー時刻とDB上の `reminder_time` を突き合わせた実データでの確認） | [ ] |
-| 4 | 期間内に対象日が0件のとき `achievementRate` は `null` | 特定曜日習慣で、指定期間にその曜日が含まれないよう `from`/`to` を指定 → `GET /dashboard` | `achievementRate` が `null`（「対象なし」。`0` ではない） | [ ] |
-| 5 | 過去の記録を遡って修正すると集計が再計算される | チェックインを `not_done` で記録 → `GET /dashboard` で確認 → 同日を `done` に修正 → 再度 `GET /dashboard` | ストリーク・達成率が修正後の値に更新される | [ ] |
+| 1 | チェックイン記録がダッシュボード集計に反映される | 月水金習慣を登録 → 数日分 `PUT` で記録 → `GET /dashboard?from=&to=` | 実DBから取得したチェックイン列を元に `currentStreak`/`longestStreak`/`achievementRate`/`heatmap` が正しく算出される（Domain層のアルゴリズムをユニットテストで検証済み。ここでは実データ経路での接続を確認） | [x] |
+| 2 | 複数習慣を横断して習慣ごとに集計される | `daily`/`weekly_count`/`specific_days` の習慣を複数登録し、それぞれにチェックインを記録 → `GET /dashboard` | 習慣ごとに独立した集計結果が配列で返る（N+1回避自体はユニットテストで検証済み。ここでは実DBに対する `listByHabitInRange` の実クエリ結果が正しいことを確認） | [x] |
+| 3 | リマインド超過ハイライトが当日チェックインリストに反映される | `reminderTime` を過去時刻に設定した未完了の対象習慣を登録 → `GET /check-ins?date=today` | `overdue=true` が返る（サーバー時刻とDB上の `reminder_time` を突き合わせた実データでの確認） | [x] |
+| 4 | 期間内に対象日が0件のとき `achievementRate` は `null` | 特定曜日習慣で、指定期間にその曜日が含まれないよう `from`/`to` を指定 → `GET /dashboard` | `achievementRate` が `null`（「対象なし」。`0` ではない） | [x] |
+| 5 | 過去の記録を遡って修正すると集計が再計算される | チェックインを `not_done` で記録 → `GET /dashboard` で確認 → 同日を `done` に修正 → 再度 `GET /dashboard` | ストリーク・達成率が修正後の値に更新される | [x] |
 
 ## 備考
 
@@ -34,4 +34,3 @@
   （[`test-api-08-dashboard-summary.md`](../4_unit-test/test-api-08-dashboard-summary.md)）。
   本書は実DBに対する `listActive`/`listByHabitInRange` の実クエリ結果を組み合わせた際に
   同じ結果が得られることを確認する。
-- 未実装（testcontainers-go導入時に実装予定）。

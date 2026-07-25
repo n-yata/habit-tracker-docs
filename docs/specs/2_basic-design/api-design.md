@@ -61,7 +61,7 @@
 
 | ID | 入力 | 出力 | 備考 |
 |---|---|---|---|
-| API-08 | クエリ `from`, `to`（期間） | 習慣ごとの `{ currentStreak, longestStreak, achievementRate, heatmap[] }` 集約 | 算出ロジックは baseline の「アルゴリズム設計（ドメインロジック）」 |
+| API-08 | クエリ `from`, `to`（期間）, `habitId`（任意。指定時はarchived済みも対象） | 習慣ごとの `{ currentStreak, longestStreak, achievementRate, heatmap[] }` 集約 | 算出ロジックは baseline の「アルゴリズム設計（ドメインロジック）」。詳細は [`api-08-dashboard-summary.md`](../3_detail-design/api/api-08-dashboard-summary.md) |
 
 ## エラーレスポンス
 

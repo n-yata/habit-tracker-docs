@@ -22,6 +22,7 @@
 |---|---|---|:--:|---|---|
 | `from` | query | string | 必須 | `YYYY-MM-DD` 形式 | 集計期間の開始日 |
 | `to` | query | string | 必須 | `YYYY-MM-DD` 形式、`from` 以降 | 集計期間の終了日 |
+| `habitId` | query | UUID | 任意 | UUID形式 | 指定時はその習慣のみを対象に集計する。`archived=true` の習慣でも取得可能（習慣詳細画面での過去データ参照用）。省略時は `archived=false` の全習慣が対象 |
 
 ## レスポンス仕様
 
@@ -63,9 +64,10 @@
 
 ## 処理概要
 
-1. Handler: クエリパラメータ `from`・`to` を取得・形式検証（`from <= to`）。
+1. Handler: クエリパラメータ `from`・`to`・`habitId`（任意）を取得・形式検証（`from <= to`）。
 2. Service (`DashboardService.getSummary`):
-   a. `HabitRepository.listActive()` でアクティブな習慣を取得。
+   a. `habitId` が指定されていれば `HabitRepository.findById(habitId)` でその習慣のみ（`archived`
+      問わず）を対象とする。未指定なら `HabitRepository.listActive()` でアクティブな習慣を取得。
    b. 習慣ごとに `CheckInRepository.listByHabitInRange(habitId, from, to)` でチェックインを一括取得
       （N+1回避のため期間指定で一括取得し、Domain層でメモリ集計）。
    c. Domain（`calcStreak`）で現在・最長ストリークを算出。
