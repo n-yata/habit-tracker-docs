@@ -16,18 +16,24 @@
 ## Skills（description により自動ロード／`/name` でも起動）
 
 状況に応じて自動的にロードされる知識・手順・テンプレート。`/name` での明示起動も可能。
-スキルはプレフィックスでグループ分けしている（`docs-*` = `docs/` 配下の成果物ドキュメントを作る系、`flow-*` = 開発ワークフロー〔workflow：進め方〕を支援する系）。
+スキルはプレフィックスでグループ分けしている（`baseline-*` = `docs/baseline/`（指標＝正本）を作る系、`specs-*` = `docs/specs/`（各工程の顧客提出成果物）を作る系、`flow-*` = 開発ワークフロー〔workflow：進め方〕を支援する系）。
 
-### `docs-*`（ドキュメント作成系。`docs/` 配下の永続ドキュメントを作る）
+### `baseline-*`（指標ドキュメント作成系。`docs/baseline/` の指標＝正本を作る）
 
 | skill | 概要 | 成果物 |
 |---|---|---|
-| **docs-prd** | プロダクト要求定義書(PRD)を作成・更新する。プロダクトビジョン・ペルソナ・KPI・機能/非機能要件を定義する。 | `docs/baseline/product-requirements.md` |
-| **docs-functional-design** | 機能設計書を作成・更新する。PRD の要件を技術的にどう実現するかを設計する。 | `docs/baseline/functional-design.md`（重要点の正本。実装詳細は `docs/specs/2_basic-design/` と `docs/specs/_shared/`） |
-| **docs-architecture-design** | アーキテクチャ設計書を作成・更新する。システム構造・技術選定（テクノロジースタック）を定義する。 | `docs/baseline/architecture.md` |
-| **docs-repository-structure** | リポジトリ構造定義書を作成・更新する。技術スタックを反映した具体的なディレクトリ構造を定義する。 | `docs/baseline/repository-structure.md` |
-| **docs-development-guidelines** | 開発ガイドラインを作成・更新する。コーディング規約・命名規則・Git運用・テスト戦略の参照元でもある。 | `docs/baseline/development-guidelines.md` |
-| **docs-glossary** | 用語集を作成・更新する。プロジェクト固有の用語・ユビキタス言語を体系的に定義する。 | `docs/baseline/glossary.md` |
+| **baseline-prd** | プロダクト要求定義書(PRD)を作成・更新する。プロダクトビジョン・ペルソナ・KPI・機能/非機能要件を定義する。 | `docs/baseline/product-requirements.md` |
+| **baseline-functional-design** | 機能設計書を作成・更新する。PRD の要件を技術的にどう実現するかを設計する。 | `docs/baseline/functional-design.md`（重要点の正本。実装詳細は `docs/specs/2_basic-design/` と `docs/specs/_shared/`） |
+| **baseline-architecture-design** | アーキテクチャ設計書を作成・更新する。システム構造・技術選定（テクノロジースタック）を定義する。 | `docs/baseline/architecture.md` |
+| **baseline-repository-structure** | リポジトリ構造定義書を作成・更新する。技術スタックを反映した具体的なディレクトリ構造を定義する。 | `docs/baseline/repository-structure.md` |
+| **baseline-development-guidelines** | 開発ガイドラインを作成・更新する。コーディング規約・命名規則・Git運用・テスト戦略の参照元でもある。 | `docs/baseline/development-guidelines.md` |
+| **baseline-glossary** | 用語集を作成・更新する。プロジェクト固有の用語・ユビキタス言語を体系的に定義する。 | `docs/baseline/glossary.md` |
+
+### `specs-*`（工程成果物作成系。`docs/specs/` の各工程の顧客提出成果物を作る）
+
+| skill | 概要 | 成果物 |
+|---|---|---|
+| **specs-requirements** | 要件定義工程の顧客提出成果物（要件定義書・非機能要件定義書）を作成・更新する。baseline の PRD/機能設計を正本に FR/NFR を採番し、顧客提出レベルに体系化する。 | `docs/specs/1_requirements/`（`requirements-definition.md`・`non-functional-requirements.md`） |
 
 ### `flow-*`（ワークフロー系。開発の進め方＝アイデアを練る・作業を計画/実装/振り返る といったプロセスを支援する）
 

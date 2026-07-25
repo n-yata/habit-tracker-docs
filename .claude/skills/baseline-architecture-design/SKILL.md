@@ -1,5 +1,5 @@
 ---
-name: docs-architecture-design
+name: baseline-architecture-design
 description: アーキテクチャ設計書(docs/baseline/architecture.md)を作成・更新するための詳細ガイドとテンプレート。システム構造・技術選定(テクノロジースタック)を定義する。アーキテクチャ設計書の作成・改訂時にのみ使用(個別の設計相談・レビューは architecture-designer エージェントを使う)。
 allowed-tools: Read, Write
 ---

@@ -1,5 +1,5 @@
 ---
-name: docs-functional-design
+name: baseline-functional-design
 description: 機能設計書(docs/baseline/functional-design.md。データモデル・中核アルゴリズム・API/画面/ユースケースの一覧など、プロジェクトの指標としてぶれてはいけない重要点の正本。実装詳細は docs/specs/2_basic-design/ と docs/specs/_shared/ に分割)を作成・更新するための詳細ガイドとテンプレート。PRDの要件を技術的にどう実現するかを設計する。機能設計書の作成・改訂時にのみ使用。
 allowed-tools: Read, Write
 ---

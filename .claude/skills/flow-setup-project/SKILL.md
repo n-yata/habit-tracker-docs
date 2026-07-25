@@ -1,6 +1,6 @@
 ---
 name: flow-setup-project
-description: 初回セットアップのワークフロー。docs/baseline/ideas/ を入力に、6つの永続ドキュメント(PRD・機能設計・アーキテクチャ・リポジトリ構造・開発ガイドライン・用語集)を docs-* スキルを順に使って対話的に作成する。プロジェクトの初期立ち上げ・永続ドキュメント一式の新規作成時に使用する。
+description: 初回セットアップのワークフロー。docs/baseline/ideas/ を入力に、6つの永続ドキュメント(PRD・機能設計・アーキテクチャ・リポジトリ構造・開発ガイドライン・用語集)を baseline-* スキルを順に使って対話的に作成する。プロジェクトの初期立ち上げ・永続ドキュメント一式の新規作成時に使用する。
 allowed-tools: Read, Write, Edit, Glob, Bash, Skill
 ---
 
@@ -33,7 +33,7 @@ ls docs/baseline/ideas/
 
 ### ステップ1: プロダクト要求定義書の作成
 
-1. **docs-prdスキル**をロード
+1. **baseline-prdスキル**をロード
 2. `docs/baseline/ideas/`の内容を元に`docs/baseline/product-requirements.md`を作成
 3. 壁打ちで出たアイデアを具体化：
    - 詳細なユーザーストーリー
@@ -46,7 +46,7 @@ ls docs/baseline/ideas/
 
 ### ステップ2: 機能設計書の作成
 
-1. **docs-functional-designスキル**をロード
+1. **baseline-functional-designスキル**をロード
 2. `docs/baseline/product-requirements.md`を読む
 3. スキルのテンプレートとガイドに従って`docs/baseline/functional-design.md`
    （データモデル・中核アルゴリズム・API/画面/ユースケースの一覧・モジュール構成図など、
@@ -56,25 +56,25 @@ ls docs/baseline/ideas/
 
 ### ステップ3: アーキテクチャ設計書の作成
 
-1. **docs-architecture-designスキル**をロード
+1. **baseline-architecture-designスキル**をロード
 2. 既存のドキュメントを読む
 3. スキルのテンプレートとガイドに従って`docs/baseline/architecture.md`を作成
 
 ### ステップ4: リポジトリ構造定義書の作成
 
-1. **docs-repository-structureスキル**をロード
+1. **baseline-repository-structureスキル**をロード
 2. 既存のドキュメントを読む
 3. スキルのテンプレートに従って`docs/baseline/repository-structure.md`を作成
 
 ### ステップ5: 開発ガイドラインの作成
 
-1. **docs-development-guidelinesスキル**をロード
+1. **baseline-development-guidelinesスキル**をロード
 2. 既存のドキュメントを読む
 3. スキルのテンプレートに従って`docs/baseline/development-guidelines.md`を作成
 
 ### ステップ6: 用語集の作成
 
-1. **docs-glossaryスキル**をロード
+1. **baseline-glossaryスキル**をロード
 2. 既存のドキュメントを読む
 3. スキルのテンプレートに従って`docs/baseline/glossary.md`を作成
 
