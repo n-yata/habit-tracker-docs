@@ -222,12 +222,15 @@ coverage/
 ### backend セットアップ手順
 ```bash
 git clone <backend-url> && cd habit-tracker-backend
-cp .env.example .env                 # DB接続情報を設定
+cp .env.example .env                 # DB接続情報・FRONTEND_ORIGIN を設定
 docker compose up -d                 # PostgreSQL 起動（Postgres のみ）
 migrate -path db/migrations -database "$DATABASE_URL" up   # マイグレーション
 go run ./cmd/api                     # API サーバ起動
 go test ./...                        # テスト
 ```
+> **注意**: Go アプリは `.env` を自動読み込みしない（godotenv 等は未導入）。`.env` を書くだけでは
+> `os.Getenv` に値は渡らないため、`.env` の内容を明示的にシェルの環境変数へ展開してから
+> `go run` を実行する必要がある（下記 `scripts/start-dev.ps1` はこれを自動化する）。
 
 ### frontend セットアップ手順
 ```bash
@@ -238,6 +241,12 @@ npm ci                               # 依存インストール
 npm run dev                          # 開発サーバ
 npm test                             # Vitest
 ```
+
+### 3リポジトリ一括起動（推奨）
+`habit-tracker-docs` と兄弟ディレクトリに backend・frontend を配置している場合、
+`habit-tracker-docs/scripts/start-dev.ps1` で PostgreSQL・backend・frontend を一括起動できる。
+`.env` の環境変数展開（上記の注意点への対応）とポート3000の残留プロセス後始末を自動で行うため、
+手動セットアップより優先して使う。
 
 ### 推奨開発ツール
 - backend: golangci-lint、air（ホットリロード、任意）。

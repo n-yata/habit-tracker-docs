@@ -61,10 +61,12 @@ habit-tracker-docs/
 │       ├── design.md
 │       ├── tasklist.md
 │       └── retrospective.md
-└── .claude/                        # Claude Code 設定
-    ├── skills/                     # スキル（ワークフローの入口 flow-* も含む）
-    ├── agents/
-    └── README.md                   # skill/agent の目次
+├── .claude/                        # Claude Code 設定
+│   ├── skills/                     # スキル（ワークフローの入口 flow-* も含む）
+│   ├── agents/
+│   └── README.md                   # skill/agent の目次
+└── scripts/
+    └── start-dev.ps1                 # 3リポジトリ一括起動（PostgreSQL・backend・frontend、env読み込み・ポート後始末込み）
 ```
 
 **役割**: ドキュメント・スペック管理。実装コードは持たない。`docs/` 配下は `baseline/`（指標。
