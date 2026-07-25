@@ -15,11 +15,11 @@
 
 | No | 観点 | 前提・入力 | 期待結果 | 完了 |
 |---|---|---|---|:--:|
-| 1 | 正常系 | 既存 `daily` 習慣を `weekly_count`（`weeklyTargetCount=3`）へ変更 | `200`、`recurrenceType="weekly_count"`、`targetWeekdays=null` に置き換わる | [ ] |
-| 2 | 正常系 | 既存 `weekly_count` 習慣を `specific_days`（`targetWeekdays=[0,6]`）へ変更 | `200`、`weeklyTargetCount=null` に置き換わる | [ ] |
-| 3 | 正常系 | 更新実行 | `updatedAt` が更新前より新しい値になる。`createdAt` は不変 | [ ] |
-| 4 | 異常系 | 存在しない `id` | `404`「対象の習慣が見つかりません」 | [ ] |
-| 5〜17 | 異常系 | API-02（習慣登録）のテストケース7〜17と同一のバリデーション違反パターン | 同一のエラーメッセージで `400` | [ ] |
+| 1 | 正常系 | 既存 `daily` 習慣を `weekly_count`（`weeklyTargetCount=3`）へ変更 | `200`、`recurrenceType="weekly_count"`、`targetWeekdays=null` に置き換わる | [x] |
+| 2 | 正常系 | 既存 `weekly_count` 習慣を `specific_days`（`targetWeekdays=[0,6]`）へ変更 | `200`、`weeklyTargetCount=null` に置き換わる | [x] |
+| 3 | 正常系 | 更新実行 | `updatedAt` が更新前より新しい値になる。`createdAt` は不変 | [x] |
+| 4 | 異常系 | 存在しない `id` | `404`「対象の習慣が見つかりません」 | [x] |
+| 5〜17 | 異常系 | API-02（習慣登録）のテストケース7〜17と同一のバリデーション違反パターン | 同一のエラーメッセージで `400` | [x] |
 
 ## 備考
 

@@ -19,7 +19,7 @@
 | 2 | 正常系 | `archived=false` の習慣が3件登録済み | `200`、3件すべてが配列に含まれる | [ ] |
 | 3 | 正常系 | `archived=false` 2件 + `archived=true` 1件が混在 | `200`、`archived=false` の2件のみ返る（`archived=true` は除外） | [ ] |
 | 4 | 正常系 | `recurrenceType` が `daily`/`weekly_count`/`specific_days` の習慣が混在 | 各習慣の `weeklyTargetCount`/`targetWeekdays` が種別に応じて正しく `null`/値を持つ | [ ] |
-| 5 | 異常系 | DB接続不可（testcontainers停止等でシミュレート） | `500` | [ ] |
+| 5 | 異常系 | DB接続不可（testcontainers停止等でシミュレート） | `500` | [x] |
 
 ## 備考
 
