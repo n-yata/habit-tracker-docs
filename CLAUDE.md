@@ -212,6 +212,7 @@ docs/
    2. コミット前に**security-engineerのセキュリティレビュー**を実施(後述の既存ルール)
    3. 変更一式(実装 + `retrospective.md`)をコミットする
    4. 必要に応じてブランチを push し、PR を作成する(`gh pr create`)。`main` へマージする場合は **Merge commit**
+   5. **`main` へマージ済みの feature ブランチは削除する**(ローカルマージ・PRマージのいずれの場合も)。`git branch --merged main` 等でマージ済みを確認してから削除し、不要なブランチを残さない。
 
 ### 補足
 
