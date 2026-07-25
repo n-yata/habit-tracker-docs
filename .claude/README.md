@@ -35,7 +35,7 @@
 |---|---|---|
 | **specs-requirements** | 要件定義工程の顧客提出成果物（要件定義書・非機能要件定義書）を作成・更新する。baseline の PRD/機能設計を正本に FR/NFR を採番し、顧客提出レベルに体系化する。 | `docs/specs/1_requirements/`（`requirements-definition.md`・`non-functional-requirements.md`） |
 | **specs-basic-design** | 基本設計工程の実装詳細（コンポーネント設計・ユースケースのシーケンス図・画面設計・API設計）を作成・更新する。baseline の機能設計書を正本に、レイヤー別インターフェース・画面のレイアウト/項目/イベント・APIの入出力を実装レベルまで詳細化する。 | `docs/specs/2_basic-design/`（`component-design.md`・`usecase.md`・`screen-design.md`・`api-design.md`） |
-| **specs-detail-design** | 詳細設計工程の成果物（テーブル定義書）を作成・更新する。baseline の機能設計書の概念モデル（ER図・区分値）を正本に、物理スキーマ（カラム定義・型・物理制約名・索引名）まで詳細化する。 | `docs/specs/3_detail-design/`（`table-definition.md`） |
+| **specs-detail-design** | 詳細設計工程の成果物（テーブル定義書・API詳細設計書・画面詳細設計書・単体テスト仕様書）を作成・更新する。baseline / 2_basic-design を正本に、物理スキーマ・API単位・画面単位・テストケース単位まで詳細化する。 | `docs/specs/3_detail-design/`（`db/table-definition.md`・`api/api-{ID}-*.md`・`screen/screen-{ID}-*.md`・`test/test-api-{ID}-*.md`・`test/test-screen-{ID}-*.md`） |
 
 ### `flow-*`（ワークフロー系。開発の進め方＝アイデアを練る・作業を計画/実装/振り返る といったプロセスを支援する）
 
