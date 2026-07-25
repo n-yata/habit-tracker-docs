@@ -1,7 +1,7 @@
 # API-08: ダッシュボード集計取得 単体テスト仕様書
 
-> 対象APIの詳細設計は [`api-08-dashboard-summary.md`](../api/api-08-dashboard-summary.md)。テスト方針
-> 全体は [`cross-cutting.md`](../../_shared/cross-cutting.md)「テスト戦略」を正本とする。本書はAPI-08の
+> 対象APIの詳細設計は [`api-08-dashboard-summary.md`](../3_detail-design/api/api-08-dashboard-summary.md)。テスト方針
+> 全体は [`cross-cutting.md`](../_shared/cross-cutting.md)「テスト戦略」を正本とする。本書はAPI-08の
 > 具体的なテストケース、および本APIが依存する Domain層 `calcStreak` / `calcAchievementRate` の
 > テストケースを列挙する（baseline「アルゴリズム設計」のアルゴリズム2・3）。
 

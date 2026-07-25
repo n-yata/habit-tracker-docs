@@ -80,6 +80,8 @@ docs/
     1_requirements/
     2_basic-design/                機能設計書の実装詳細（下記「baseline と specs の使い分け」参照）
     3_detail-design/
+    4_unit-test/                   単体テスト仕様書（API/画面ごと、実DB不要）
+    5_integration-test/            結合テスト仕様書（画面単位、実PostgreSQL必須。API単位には分割しない）
     _shared/                     フェーズ横断で参照する実装詳細（特定フェーズに属さない）
 ```
 
@@ -98,8 +100,11 @@ docs/
 | `glossary.md` | 横断 | ユビキタス言語 |
 
 > **重要**: `baseline/` がカバーするのは主に **要件定義 ＋ 基本設計 ＋ 横断規約** まで。
-> **詳細設計の残り・テスト設計・実装・結合テスト**は `baseline/` ではなく、作業単位の
-> `.steering/[日付]-[作業名]/`（`design.md` / `tasklist.md`、`/flow-add-feature`）が工程ごとに担う。
+> **テストケース仕様（何をテストするかの一覧）は `docs/specs/4_unit-test/`（単体）・
+> `docs/specs/5_integration-test/`（結合、画面単位）が担当する**（`specs-unit-test`・
+> `specs-integration-test` スキル）。それ以外の**詳細設計の残り・実装・テストの実施そのもの**は
+> `baseline/` でも `docs/specs/` でもなく、作業単位の `.steering/[日付]-[作業名]/`
+> （`design.md` / `tasklist.md`、`/flow-add-feature`）が工程ごとに担う。
 
 #### baseline と specs の使い分け（実装詳細が増えたとき）
 
@@ -119,7 +124,10 @@ docs/
      レイヤー別インターフェース・ユースケースのシーケンス図フル・画面のレイアウト/項目/イベントは
      `docs/specs/2_basic-design/`、UI表示仕様・エラーハンドリング・テスト戦略の詳細は
      `docs/specs/_shared/` へ、**データモデルの物理スキーマ（カラム定義・型・物理制約名・索引名）**は
-     論理から具体へ移る内容のため `docs/specs/3_detail-design/`（テーブル定義書）へ。
+     論理から具体へ移る内容のため `docs/specs/3_detail-design/`（テーブル定義書）へ。**具体的な
+     テストケース一覧**（入力値・期待結果・完了チェック欄）は、実DB不要なら
+     `docs/specs/4_unit-test/`、実PostgreSQL必須の画面単位シナリオなら
+     `docs/specs/5_integration-test/` へ。
 3. **迷ったら重要点側に倒す** — 「ぶれたら困るか」「他のドキュメントや実装が前提にするか」を
    基準に、迷った内容は baseline に残す。
 

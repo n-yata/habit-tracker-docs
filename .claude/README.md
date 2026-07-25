@@ -35,7 +35,9 @@
 |---|---|---|
 | **specs-requirements** | 要件定義工程の顧客提出成果物（要件定義書・非機能要件定義書）を作成・更新する。baseline の PRD/機能設計を正本に FR/NFR を採番し、顧客提出レベルに体系化する。 | `docs/specs/1_requirements/`（`requirements-definition.md`・`non-functional-requirements.md`） |
 | **specs-basic-design** | 基本設計工程の実装詳細（コンポーネント設計・ユースケースのシーケンス図・画面設計・API設計）を作成・更新する。baseline の機能設計書を正本に、レイヤー別インターフェース・画面のレイアウト/項目/イベント・APIの入出力を実装レベルまで詳細化する。 | `docs/specs/2_basic-design/`（`component-design.md`・`usecase.md`・`screen-design.md`・`api-design.md`） |
-| **specs-detail-design** | 詳細設計工程の成果物（テーブル定義書・API詳細設計書・画面詳細設計書・単体テスト仕様書）を作成・更新する。baseline / 2_basic-design を正本に、物理スキーマ・API単位・画面単位・テストケース単位まで詳細化する。 | `docs/specs/3_detail-design/`（`db/table-definition.md`・`api/api-{ID}-*.md`・`screen/screen-{ID}-*.md`・`test/test-api-{ID}-*.md`・`test/test-screen-{ID}-*.md`） |
+| **specs-detail-design** | 詳細設計工程の成果物（テーブル定義書・API詳細設計書・画面詳細設計書）を作成・更新する。baseline / 2_basic-design を正本に、物理スキーマ・API単位・画面単位まで詳細化する。テストケース仕様書は specs-unit-test / specs-integration-test が担当。 | `docs/specs/3_detail-design/`（`db/table-definition.md`・`api/api-{ID}-*.md`・`screen/screen-{ID}-*.md`） |
+| **specs-unit-test** | 単体テスト仕様書（API/画面ごとの実DB不要なテストケース一覧）を作成・更新する。specs-detail-designのAPI/画面詳細設計を正本に、Domain/Service/Handler層（またはコンポーネント）の具体的な入力値・期待結果まで詳細化する。 | `docs/specs/4_unit-test/`（`test-api-{ID}-*.md`・`test-screen-{ID}-*.md`） |
+| **specs-integration-test** | 結合テスト仕様書（画面単位の実DB必須テストケース一覧）を作成・更新する。画面が呼び出すAPI群とDBを横断したシナリオを、画面単位（APIごとではない）にまとめる。 | `docs/specs/5_integration-test/`（`test-integration-{screen-slug}.md`） |
 
 ### `flow-*`（ワークフロー系。開発の進め方＝アイデアを練る・作業を計画/実装/振り返る といったプロセスを支援する）
 

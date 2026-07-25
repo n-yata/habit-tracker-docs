@@ -1,9 +1,14 @@
 # API-06: チェックイン取得 単体テスト仕様書
 
-> 対象APIの詳細設計は [`api-06-checkins-list.md`](../api/api-06-checkins-list.md)。テスト方針全体は
-> [`cross-cutting.md`](../../_shared/cross-cutting.md)「テスト戦略」を正本とする。本書はAPI-06の
-> 具体的なテストケース、および本APIが依存する Domain層 `isTargetDate` のテストケースを列挙する
-> （`isTargetDate` は baseline「アルゴリズム設計」のアルゴリズム1）。
+> 対象APIの詳細設計は [`api-06-checkins-list.md`](../3_detail-design/api/api-06-checkins-list.md)。テスト方針全体は
+> [`cross-cutting.md`](../_shared/cross-cutting.md)「テスト戦略」を正本とする。本書はAPI-06の
+> **ユニットテスト**（実DB不要）のケース、および本APIが依存する Domain層 `isTargetDate` のテスト
+> ケースを列挙する（`isTargetDate` は baseline「アルゴリズム設計」のアルゴリズム1）。実PostgreSQLを
+> 要する結合テストのケースは画面単位の
+> [`test-integration-check-in.md`](../5_integration-test/test-integration-check-in.md)
+> （日付指定チェックイン画面）・
+> [`test-integration-dashboard.md`](../5_integration-test/test-integration-dashboard.md)
+> （ダッシュボード画面）を参照。
 
 ## テスト対象
 
@@ -11,7 +16,6 @@
 |---|---|---|
 | Domain | `isTargetDate(habit, date)` | ユニットテスト（Go, testify）— 主眼 |
 | Service | `CheckInService.getCheckInsForDate`（対象日フィルタ・overdue算出） | ユニットテスト |
-| Repository | `CheckInRepository.listByDate` | 統合テスト |
 
 ## テストケース一覧: Domain `isTargetDate`
 

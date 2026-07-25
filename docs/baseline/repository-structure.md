@@ -42,15 +42,17 @@ habit-tracker-docs/
 │       │   ├── usecase.md            # ユースケースのシーケンス図フル
 │       │   ├── api-design.md         # 各APIの入出力詳細・JSON例・エラーレスポンス
 │       │   └── screen-design.md      # 画面のレイアウト/項目/イベント
-│       ├── 3_detail-design/          # 詳細設計工程の成果物（物理レベル・API単位・画面単位・テストケース単位）
+│       ├── 3_detail-design/          # 詳細設計工程の成果物（物理レベル・API単位・画面単位）
 │       │   ├── db/
 │       │   │   └── table-definition.md     # テーブル定義書（物理スキーマ）
 │       │   ├── api/
 │       │   │   └── api-XX-*.md             # API単位の詳細設計（8本）
-│       │   ├── screen/
-│       │   │   └── screen-XX-*.md          # 画面単位の詳細設計（4本）
-│       │   └── test/
-│       │       └── test-{api,screen}-XX-*.md  # 単体テスト仕様（API 8本 + 画面 4本）
+│       │   └── screen/
+│       │       └── screen-XX-*.md          # 画面単位の詳細設計（4本）
+│       ├── 4_unit-test/              # 単体テスト仕様書（実DB不要、API/画面単位）
+│       │   └── test-{api,screen}-XX-*.md   # API 8本 + 画面 4本
+│       ├── 5_integration-test/       # 結合テスト仕様書（実PostgreSQL必須、画面単位。APIごとには分割しない）
+│       │   └── test-integration-{screen-slug}.md
 │       └── _shared/                  # フェーズ横断で参照する実装詳細（特定フェーズに属さない）
 │           └── cross-cutting.md        # UI表示仕様・エラーハンドリング・非機能・テスト戦略の詳細
 ├── .steering/                      # 作業単位ドキュメント（履歴保持）

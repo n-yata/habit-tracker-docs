@@ -1,15 +1,16 @@
 # API-04: 習慣更新 単体テスト仕様書
 
-> 対象APIの詳細設計は [`api-04-habits-update.md`](../api/api-04-habits-update.md)。テスト方針全体は
-> [`cross-cutting.md`](../../_shared/cross-cutting.md)「テスト戦略」を正本とする。本書はAPI-04の
-> 具体的なテストケースを列挙する。
+> 対象APIの詳細設計は [`api-04-habits-update.md`](../3_detail-design/api/api-04-habits-update.md)。テスト方針全体は
+> [`cross-cutting.md`](../_shared/cross-cutting.md)「テスト戦略」を正本とする。本書はAPI-04の
+> **ユニットテスト**（実DB不要）のケースのみを列挙する。実PostgreSQLを要する結合テストのケースは
+> 画面単位の [`test-integration-habits.md`](../5_integration-test/test-integration-habits.md)
+> （習慣管理画面）を参照。
 
 ## テスト対象
 
 | レイヤー | 対象 | テスト種別 |
 |---|---|---|
 | Service | `HabitService.updateHabit`（存在確認・バリデーション） | ユニットテスト |
-| Repository | `HabitRepository.update` | 統合テスト |
 
 ## テストケース一覧
 

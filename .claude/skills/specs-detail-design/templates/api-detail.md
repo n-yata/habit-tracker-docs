@@ -59,5 +59,5 @@
 - 異常系: {バリデーション違反・存在しないリソース等}
 - 境界値: {値域の最小/最大等}
 
-> 具体的な入力値・期待結果の一覧は
-> `docs/specs/3_detail-design/test/test-api-{ID}-{slug}.md` に書く（ここでは観点レベルに留める）。
+> 具体的な入力値・期待結果の一覧は `docs/specs/4_unit-test/test-api-{ID}-{slug}.md`（ユニット）・
+> `docs/specs/5_integration-test/`（画面単位の結合テスト）に書く（ここでは観点レベルに留める）。

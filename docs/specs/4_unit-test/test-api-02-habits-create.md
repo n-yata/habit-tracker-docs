@@ -1,16 +1,16 @@
 # API-02: 習慣登録 単体テスト仕様書
 
-> 対象APIの詳細設計は [`api-02-habits-create.md`](../api/api-02-habits-create.md)。テスト方針全体は
-> [`cross-cutting.md`](../../_shared/cross-cutting.md)「テスト戦略」を正本とする。本書はAPI-02の
-> 具体的なテストケースを列挙する。
+> 対象APIの詳細設計は [`api-02-habits-create.md`](../3_detail-design/api/api-02-habits-create.md)。テスト方針全体は
+> [`cross-cutting.md`](../_shared/cross-cutting.md)「テスト戦略」を正本とする。本書はAPI-02の
+> **ユニットテスト**（実DB不要）のケースのみを列挙する。実PostgreSQLを要する結合テストのケースは
+> 画面単位の [`test-integration-habits.md`](../5_integration-test/test-integration-habits.md)
+> （習慣管理画面）を参照。
 
 ## テスト対象
 
 | レイヤー | 対象 | テスト種別 |
 |---|---|---|
 | Service | `HabitService.createHabit`（バリデーション・繰り返しルール整合） | ユニットテスト（Go, testify） |
-| Repository | `HabitRepository.create` | 統合テスト |
-| Handler | バリデーションエラーの400変換 | 統合テスト |
 
 ## テストケース一覧
 
@@ -33,10 +33,12 @@
 | 15 | 異常系 | `recurrenceType="daily"` かつ `targetWeekdays=[1]` を指定 | `400`「繰り返し種別と入力項目が一致していません」 | [x] |
 | 16 | 異常系 | `recurrenceType="weekly_count"` かつ `weeklyTargetCount` 未指定 | `400`「週の回数は1〜7で入力してください」 | [x] |
 | 17 | 異常系 | `recurrenceType="specific_days"` かつ `targetWeekdays` 未指定 | `400`「特定曜日ルールでは曜日を1つ以上選んでください」 | [x] |
-| 18 | 異常系 | DB障害（Repository層でエラー発生） | `500` | [x] |
 
 ## 備考
 
 - ケース1〜17はService層の `createHabit` バリデーションロジックをユニットテストで網羅する
   （繰り返しルール整合表: baseline「データモデル」参照）。
-- ケース18はHandler/Repository境界の統合テストとして実装する。
+- ケース18（DB障害時のエラー伝播）は
+  [`test-integration-habits.md`](../5_integration-test/test-integration-habits.md) ケース8
+  （習慣管理画面の結合テスト）を参照。Service層でのエラー伝播自体はフェイクRepositoryによる
+  ユニットテストで検証済みだが、Handler/Repository境界を実DBで検証する結合テストは別途実施する。

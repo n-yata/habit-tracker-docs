@@ -1,15 +1,16 @@
 # API-07: チェックイン記録 単体テスト仕様書
 
-> 対象APIの詳細設計は [`api-07-checkins-upsert.md`](../api/api-07-checkins-upsert.md)。テスト方針全体は
-> [`cross-cutting.md`](../../_shared/cross-cutting.md)「テスト戦略」を正本とする。本書はAPI-07の
-> 具体的なテストケースを列挙する。
+> 対象APIの詳細設計は [`api-07-checkins-upsert.md`](../3_detail-design/api/api-07-checkins-upsert.md)。テスト方針全体は
+> [`cross-cutting.md`](../_shared/cross-cutting.md)「テスト戦略」を正本とする。本書はAPI-07の
+> **ユニットテスト**（実DB不要）のケースのみを列挙する。実PostgreSQLを要する結合テストのケースは
+> 画面単位の [`test-integration-check-in.md`](../5_integration-test/test-integration-check-in.md)
+> （日付指定チェックイン画面）を参照。
 
 ## テスト対象
 
 | レイヤー | 対象 | テスト種別 |
 |---|---|---|
 | Service | `CheckInService.recordCheckIn`（存在確認・対象日判定・422分岐） | ユニットテスト |
-| Repository | `CheckInRepository.upsert`（`(habit_id, date)` UNIQUE制約） | 統合テスト |
 
 ## テストケース一覧
 
@@ -21,9 +22,11 @@
 | 4 | 異常系 | 月水金習慣（`specific_days`, `targetWeekdays=[1,3,5]`）の火曜日に記録 | `422`「その日はこの習慣の対象ではありません」 | [x] |
 | 5 | 異常系 | `status="maybe"`（不正な値） | `400`「status は done または not_done を指定してください」 | [x] |
 | 6 | 異常系 | `date` が `YYYY-MM-DD` 形式でない | `400` | [x] |
-| 7 | 境界値（統合） | 同一 `(habit_id, date)` へ連続して2回 `PUT` を実行 | `check_ins` テーブルに該当 `(habit_id, date)` の行が1件のみ存在する（UNIQUE制約による upsert の確認） | [ ] |
 
 ## 備考
 
-- ケース7はRepository層の統合テストとして、実PostgreSQLに対する `ON CONFLICT` upsert 動作を検証する
-  （`check_ins_habit_date_unique` を競合ターゲットとする）。
+- ケース番号は元の一覧の番号を維持している。ケース7（実DBでのUNIQUE制約upsert確認）は
+  [`test-integration-check-in.md`](../5_integration-test/test-integration-check-in.md) ケース3を参照。
+- ケース1・2はフェイクRepositoryを用いてServiceのupsert呼び出しロジックを検証する
+  （実際の `(habit_id, date)` UNIQUE制約による衝突解決はRepository/DBの責務）。
+- ケース5・6はHandler層（JSONデコード・oapi-codegenのパラメータバインド）で検証する。
