@@ -1,30 +1,34 @@
 # 機能設計書作成ガイド
 
-このガイドは、プロダクト要求定義書(PRD)に基づいて機能設計書を作成するための実践的な指針を提供します。
+このガイドは、プロダクト要求定義書(PRD)に基づいて機能設計書（baseline の重要点の正本＋
+フェーズ横断の実装詳細）を作成するための実践的な指針を提供します。
 
 > **成果物の配置**: 機能設計書は **`docs/baseline/functional-design.md`（プロジェクトの指標として
-> ぶれてはいけない重要点の正本）＋ 実装詳細を分割した `docs/specs/2_basic-design/`**
+> ぶれてはいけない重要点の正本）＋ `docs/specs/_shared/cross-cutting.md`（フェーズ横断の実装詳細）**
 > の2箇所で構成する。どのセクションをどちらに書くか、および各ファイルのスケルトンは
 > `SKILL.md`「テンプレートの参照」と `templates/` を参照。本ガイドの各セクションの解説（下記）は、
 > その中身を書くための手法。
+>
+> **`docs/specs/2_basic-design/`**（各画面のレイアウト・API入出力詳細・レイヤー別インターフェース・
+> ユースケースのシーケンス図フルなど、この機能設計固有の実装詳細）は本スキルの範囲外。
+> baseline の作成・更新が完了したら、**`specs-basic-design` スキル**を別途使って作成する。
 
 ### 本ガイドのステップと配置先の対応
 
 本ガイドの各ステップで作った内容は、以下に配置する（正本の対応は `SKILL.md`「テンプレートの参照」）。
-**baseline は重要点（一覧・カタログ・正本表・中核ロジック）のみ。JSON例・擬似インターフェース・
-シーケンス図フル・詳細な表示/テスト仕様は specs へ。**
+**baseline は重要点（一覧・カタログ・正本表・中核ロジック）のみ。各画面/API/コンポーネントの実装詳細
+（JSON例・擬似インターフェース・シーケンス図フル・画面レイアウト）は `specs-basic-design` スキルへ。**
 
 | 本ガイドのステップ | 配置先 |
 |---|---|
 | ステップ2 システム構成図／技術スタック | `docs/baseline/functional-design.md` |
-| ステップ3 データモデル（ER図・物理スキーマ含む） | `docs/baseline/functional-design.md` |
-| ステップ4 コンポーネント設計（責務・インターフェース詳細） | `docs/specs/2_basic-design/component-design.md` |
-| ステップ5 アルゴリズム設計（中核ロジック） | `docs/baseline/functional-design.md` |
-| ステップ6 ユースケース図 | 一覧表は `docs/baseline/functional-design.md`、シーケンス図フルは `docs/specs/2_basic-design/usecase.md` |
-| ステップ7 画面設計（画面一覧・遷移図） | `docs/baseline/functional-design.md` |
-| ステップ8 モジュール構成図 | `docs/baseline/functional-design.md` |
-| ステップ9 UI設計／ステップ11 エラーハンドリング | `docs/specs/_shared/cross-cutting.md` |
-| ステップ10 ファイル構造 | 保存形式は `docs/baseline/functional-design.md`「データモデル」、物理配置は `docs/baseline/repository-structure.md` |
+| ステップ3 データモデル（エンティティ・区分値・ER図の概念モデルまで） | `docs/baseline/functional-design.md`（物理スキーマは `specs-detail-design` スキルの範囲） |
+| ステップ4 アルゴリズム設計（中核ロジック） | `docs/baseline/functional-design.md` |
+| ステップ5 ユースケース一覧 | `docs/baseline/functional-design.md`（シーケンス図フルは `specs-basic-design` スキルの範囲） |
+| ステップ6 画面設計（画面一覧・遷移図） | `docs/baseline/functional-design.md`（各画面のレイアウト・項目定義・イベントは `specs-basic-design` スキルの範囲） |
+| ステップ7 モジュール構成図 | `docs/baseline/functional-design.md` |
+| ステップ8 UI設計／ステップ10 エラーハンドリング | `docs/specs/_shared/cross-cutting.md` |
+| ステップ9 ファイル構造 | 保存形式は `docs/baseline/functional-design.md`「データモデル」、物理配置は `docs/baseline/repository-structure.md` |
 
 ## 機能設計書の目的
 
@@ -33,8 +37,8 @@
 **主な内容**:
 - システム構成図
 - データモデル
-- コンポーネント設計
 - アルゴリズム設計（該当する場合）
+- 画面・ユースケース・モジュール構成の一覧
 - UI設計
 - エラーハンドリング
 
@@ -149,70 +153,16 @@ erDiagram
     }
 ```
 
-### ステップ4: コンポーネント設計
+> **配置先**: 本ステップで作るのは概念モデル（TypeScript型定義・ER図）まで。カラムの物理型・
+> NULL可否・デフォルト・物理制約名・索引名などの**物理スキーマ**は本ガイドの範囲外。baseline の
+> データモデルが確定したら、**`specs-detail-design` スキル**で
+> `docs/specs/3_detail-design/db/table-definition.md` に詳細化する。
 
-各レイヤーの責務を明確にします。
+### ステップ4: アルゴリズム設計（該当する場合）
 
-#### CLIレイヤー
-
-**責務**: ユーザー入力の受付、バリデーション、結果の表示
-
-```typescript
-// CommandLineInterface
-class CLI {
-  // ユーザー入力を受け付ける
-  parseArguments(): Command;
-
-  // 結果を表示する
-  displayResult(result: Result): void;
-
-  // エラーを表示する
-  displayError(error: Error): void;
-}
-```
-
-#### サービスレイヤー
-
-**責務**: ビジネスロジックの実装
-
-```typescript
-// TaskManager
-class TaskManager {
-  // タスクを作成する
-  createTask(data: CreateTaskData): Task;
-
-  // タスク一覧を取得する
-  listTasks(filter?: FilterOptions): Task[];
-
-  // タスクを更新する
-  updateTask(id: string, data: UpdateTaskData): Task;
-
-  // タスクを削除する
-  deleteTask(id: string): void;
-}
-```
-
-#### データレイヤー
-
-**責務**: データの永続化と取得
-
-```typescript
-// FileStorage
-class FileStorage {
-  // データを保存する
-  save(data: any): void;
-
-  // データを読み込む
-  load(): any;
-
-  // ファイルが存在するか確認する
-  exists(): boolean;
-}
-```
-
-### ステップ5: アルゴリズム設計（該当する場合）
-
-複雑なロジック（例: 優先度自動推定）は詳細に設計します。
+複雑なロジック（例: 優先度自動推定）は詳細に設計します。中核ロジックの仕様は baseline に置き
+（プロジェクトの指標としてぶれてはいけない重要点）、レイヤー別の実装インターフェース（擬似コード）は
+`specs-basic-design` スキルの `component-design.md` に委ねる。
 
 #### 優先度自動推定アルゴリズムの例
 
@@ -370,37 +320,23 @@ class PriorityEstimator {
 }
 ```
 
-### ステップ6: ユースケース図
+### ステップ5: ユースケース一覧
 
-主要なユースケースをシーケンス図で表現します。
+主要なユースケースを **一覧表**（ID・アクター・目的・関連画面）として
+`docs/baseline/functional-design.md`「ユースケース一覧」に定義する（一覧は小さく、プロジェクトの
+指標として重要点にあたるため baseline に置く）。
 
-**タスク追加のフロー**:
-```mermaid
-sequenceDiagram
-    participant User
-    participant CLI
-    participant TaskManager
-    participant PriorityEstimator
-    participant FileStorage
+**ユースケース一覧（例）**:
 
-    User->>CLI: devtask add "タスク"
-    CLI->>CLI: 入力をバリデーション
-    CLI->>TaskManager: createTask(data)
-    TaskManager->>TaskManager: タスクオブジェクト作成
-    TaskManager->>PriorityEstimator: estimate(task)
-    PriorityEstimator-->>TaskManager: 推定優先度
-    TaskManager->>FileStorage: save(task)
-    FileStorage-->>TaskManager: 成功
-    TaskManager-->>CLI: 作成されたタスク
-    CLI-->>User: "タスクを作成しました (ID: xxx)"
-```
+| ID | ユースケース | アクター | 目的 | 関連画面 |
+|---|---|---|---|---|
+| UC-01 | タスク追加 | ユーザー | 新しいタスクを登録する | タスク一覧 |
 
-> **配置先**: ユースケース一覧（ID・ユースケース・アクター・目的・関連画面の表）は
-> `docs/baseline/functional-design.md`「ユースケース一覧」に置く。各ユースケースのシーケンス図
-> フルは `docs/specs/2_basic-design/usecase.md` に置き、baseline の一覧の ID
-> （UC-01 等）と対応させる。
+> **配置先**: 各ユースケースのレイヤー横断シーケンス図（システム挙動の詳細）は本ガイドの範囲外。
+> baseline の一覧の ID（UC-01 等）が確定したら、**`specs-basic-design` スキル**で
+> `docs/specs/2_basic-design/usecase.md` に詳細化する。
 
-### ステップ7: 画面設計（GUIの場合）
+### ステップ6: 画面設計（GUIの場合）
 
 画面を持つアプリでは、**画面一覧**と**画面遷移図**を `docs/baseline/functional-design.md`
 「画面設計」に定義する（一覧・遷移図はどちらも小さく、プロジェクトの指標として重要点にあたるため
@@ -422,15 +358,19 @@ stateDiagram-v2
 
 > ノード名は画面一覧の対応コンポーネント（`Dashboard`＝`DashboardPage` 等）に対応させる。
 > UI の表示仕様の詳細（色・状態表現など）は
-> `docs/specs/_shared/cross-cutting.md`（後述のステップ9）に書く。
+> `docs/specs/_shared/cross-cutting.md`（後述のステップ8）に書く。
 
-### ステップ8: モジュール構成図（画面 × API × バックエンド）
+> **配置先**: 各画面の詳細（レイアウト・画面項目定義・画面イベント）は本ガイドの範囲外。
+> baseline の画面一覧・遷移図が確定したら、**`specs-basic-design` スキル**で
+> `docs/specs/2_basic-design/screen-design.md` に詳細化する。
+
+### ステップ7: モジュール構成図（画面 × API × バックエンド）
 
 画面・API・バックエンドモジュールの対応関係を **API で紐づける俯瞰図**を、
 `docs/baseline/functional-design.md`「モジュール構成図」に置く（プロジェクト全体の俯瞰図であり
 重要点にあたるため baseline に置く）。データの正本は各節（画面＝「画面設計」、API＝「API一覧」、
-責務＝`docs/specs/2_basic-design/component-design.md` の各層）に置き、本図は
-対応の可視化に徹する（二重管理をしない）。
+責務＝`specs-basic-design` スキルが作る `docs/specs/2_basic-design/component-design.md` の各層）に
+置き、本図は対応の可視化に徹する（二重管理をしない）。
 
 ```mermaid
 flowchart LR
@@ -446,9 +386,10 @@ flowchart LR
     S1 --> A1 --> B1
 ```
 
-> API を追加・変更したら、`api-design.md` の一覧を更新したうえで本図のノード・矢印も追随させる。
+> API を追加・変更したら、baseline「API一覧」を更新したうえで本図のノード・矢印も追随させる。
+> （API 入出力詳細は `specs-basic-design` スキルが作る `api-design.md`。）
 
-### ステップ9: UI設計（該当する場合）
+### ステップ8: UI設計（該当する場合）
 
 CLIツールの場合、テーブル表示やカラーコーディングを定義します。
 
@@ -475,7 +416,7 @@ CLIツールの場合、テーブル表示やカラーコーディングを定�
 - 中 (medium): 黄
 - 低 (low): 青
 
-### ステップ10: ファイル構造（該当する場合）
+### ステップ9: ファイル構造（該当する場合）
 
 データの保存形式を定義します。
 
@@ -505,7 +446,7 @@ CLIツールの場合、テーブル表示やカラーコーディングを定�
 }
 ```
 
-### ステップ11: エラーハンドリング
+### ステップ10: エラーハンドリング
 
 エラーの種類と処理方法を定義します。
 
@@ -526,8 +467,8 @@ Claude Codeにレビューを依頼します:
 
 1. PRDの要件を満たしているか
 2. データモデルは具体的か
-3. コンポーネントの責務は明確か
-4. アルゴリズムは実装可能なレベルまで詳細化されているか
+3. アルゴリズムは実装可能なレベルまで詳細化されているか
+4. 画面・ユースケース・モジュール構成の一覧が過不足なく揃っているか
 5. エラーハンドリングは網羅されているか
 ```
 
@@ -543,5 +484,6 @@ Claude Codeの指摘に基づいて改善します。
 2. **Mermaid記法の活用**: 図表で視覚的に表現
 3. **TypeScript型定義**: データモデルを明確に
 4. **詳細なアルゴリズム設計**: 複雑なロジックは具体的に
-5. **レイヤー分離**: 各コンポーネントの責務を明確に
-6. **実装可能なレベル**: 開発者が迷わず実装できる詳細度
+5. **重要点に絞る**: 一覧・カタログ・正本表・中核ロジックのみを baseline に置き、実装詳細は
+   `docs/specs/_shared/`（フェーズ横断）と `specs-basic-design` スキル（`docs/specs/2_basic-design/`）に委ねる
+6. **実装可能なレベル**: 開発者が迷わず実装できる詳細度（baseline は骨格、specs は肉付け）
