@@ -34,11 +34,23 @@ habit-tracker-docs/
 │   │   ├── development-guidelines.md # 横断（開発全体の規約）
 │   │   └── glossary.md               # 横断（ユビキタス言語）
 │   └── specs/                      # 各フェーズで参照・作成する成果物
-│       ├── 2_basic-design/
-│       │   └── functional-design/    # 機能設計書の実装詳細（必要な時にだけ参照。一覧・中核仕様は baseline/functional-design.md が正本）
-│       │       ├── component-design.md   # レイヤー別インターフェース詳細
-│       │       ├── usecase.md            # ユースケースのシーケンス図フル
-│       │       └── api-design.md         # 各APIの入出力詳細・JSON例・エラーレスポンス
+│       ├── 1_requirements/           # 要件定義工程の顧客提出成果物
+│       │   ├── requirements-definition.md      # 要件定義書（FR）
+│       │   └── non-functional-requirements.md  # 非機能要件定義書（NFR）
+│       ├── 2_basic-design/           # 基本設計の実装詳細（必要な時にだけ参照。一覧・中核仕様は baseline/functional-design.md が正本。直下にフラット配置）
+│       │   ├── component-design.md   # レイヤー別インターフェース詳細
+│       │   ├── usecase.md            # ユースケースのシーケンス図フル
+│       │   ├── api-design.md         # 各APIの入出力詳細・JSON例・エラーレスポンス
+│       │   └── screen-design.md      # 画面のレイアウト/項目/イベント
+│       ├── 3_detail-design/          # 詳細設計工程の成果物（物理レベル・API単位・画面単位・テストケース単位）
+│       │   ├── db/
+│       │   │   └── table-definition.md     # テーブル定義書（物理スキーマ）
+│       │   ├── api/
+│       │   │   └── api-XX-*.md             # API単位の詳細設計（8本）
+│       │   ├── screen/
+│       │   │   └── screen-XX-*.md          # 画面単位の詳細設計（4本）
+│       │   └── test/
+│       │       └── test-{api,screen}-XX-*.md  # 単体テスト仕様（API 8本 + 画面 4本）
 │       └── _shared/                  # フェーズ横断で参照する実装詳細（特定フェーズに属さない）
 │           └── cross-cutting.md        # UI表示仕様・エラーハンドリング・非機能・テスト戦略の詳細
 ├── .steering/                      # 作業単位ドキュメント（履歴保持）
